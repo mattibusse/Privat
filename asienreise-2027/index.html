@@ -46,7 +46,7 @@ button{cursor:pointer}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
 .chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:2px 10px;font-size:.78rem;font-weight:600;border:1px solid var(--line);background:var(--surface-2);white-space:nowrap}
 .dot{width:9px;height:9px;border-radius:50%;flex:none;display:inline-block}
-input[type=text],input[type=date],select,textarea{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:6px 9px;min-width:0}
+input[type=text],input[type=date],input[type=number],select,textarea{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:6px 9px;min-width:0}
 textarea{width:100%;resize:vertical}
 
 /* Kopf */
@@ -240,7 +240,54 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
 .card li{margin:3px 0}
 .copyable{font-family:var(--f-mono);font-weight:600}
 
+/* Varianten */
+:root{--on-c:#14232B}
+.variant-bar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:10px 14px;margin-bottom:16px}
+.variant-bar .note{font-size:.84rem;color:var(--muted);flex:1 1 220px}
+.variant-bar .note b{color:var(--warn)}
+.var-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.var-card{padding:16px;display:grid;gap:12px;align-content:start;min-width:0}
+.var-card>*{min-width:0}
+.var-card.shown{border-color:var(--ink)}
+.var-card h3{font-size:1.2rem}
+.mini{display:flex;height:46px;border-radius:6px;overflow:hidden}
+.mini span{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;font-size:.68rem;font-weight:600;line-height:1.15;color:var(--on-c);background:var(--c-TH);border-right:2px solid var(--surface);text-align:center;padding:0 2px;overflow:hidden}
+.mini span:nth-child(even){background:color-mix(in srgb,var(--c-TH) 72%,var(--surface))}
+.mini span small{font-family:var(--f-mono);font-weight:500}
+.pc{margin:0;padding:0;list-style:none;font-size:.88rem;display:grid;gap:3px}
+.pc li{display:grid;grid-template-columns:16px minmax(0,1fr)}
+.pc.pro li::before{content:"+";color:var(--good);font-weight:700}
+.pc.con li::before{content:"−";color:var(--bad);font-weight:700}
+.votes{display:flex;gap:6px;flex-wrap:wrap}
+.vote.on{background:var(--good);border-color:var(--good);color:var(--bg)}
+.favs{display:flex;gap:6px;flex-wrap:wrap;min-height:24px}
+.fav{color:var(--good);border-color:var(--good);background:transparent}
+
+/* Ausgaben */
+.stats.five{grid-template-columns:repeat(5,minmax(0,1fr))}
+.expform{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.expform label{display:grid;gap:3px;min-width:0}
+.expform label.full{grid-column:1/-1}
+.expform input,.expform select{width:100%}
+.settle{font-family:var(--f-display);font-size:1.25rem;font-weight:700;margin:6px 0 10px}
+.btrack .act{position:absolute;top:-1px;width:5px;height:18px;border-radius:3px;background:var(--ink);transform:translateX(-50%)}
+.btrack .rng.soft{opacity:.35}
+.catbar{display:flex;height:16px;border-radius:8px;overflow:hidden;margin-top:8px;background:var(--surface-2)}
+.catbar i{display:block;height:100%}
+.catleg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px 20px;margin-top:10px;font-size:.86rem}
+.catleg div{display:flex;justify-content:space-between;gap:8px}
+.exp{display:grid;grid-template-columns:72px minmax(0,1fr) auto 30px;gap:10px;padding:9px 14px;border-bottom:1px solid var(--line);align-items:center}
+.exp:last-child{border-bottom:0}
+.exp .d{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.exp .amt{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.exp .amt small{display:block;color:var(--muted);font-size:.76rem}
+.rates{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-top:10px}
+.rates label{display:grid;grid-template-columns:auto minmax(0,1fr) 44px;gap:6px;align-items:center;font-size:.86rem}
+.rates input{width:100%}
+
 @media (max-width:1000px){
+  .var-grid{grid-template-columns:minmax(0,1fr)}
+  .stats.five{grid-template-columns:repeat(3,minmax(0,1fr))}
   .route-grid{grid-template-columns:minmax(0,1fr)}
   .check-grid{grid-template-columns:minmax(0,1fr)}
   .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -248,7 +295,9 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
 @media (max-width:640px){
   header.top{grid-template-columns:minmax(0,1fr)}
   .countdown{text-align:left}
-  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats,.stats.five{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .expform{grid-template-columns:minmax(0,1fr)}
+  .exp{grid-template-columns:58px minmax(0,1fr) auto 26px}
   .addform{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .addform input[type=text]{grid-column:1/-1}
   .bk{grid-template-columns:84px minmax(0,1fr);}
@@ -279,16 +328,19 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
 
   <nav class="tabs" aria-label="Bereiche"><div class="in" role="tablist" id="tablist">
     <button role="tab" data-tab="route" aria-selected="true">Karte &amp; Route</button>
+    <button role="tab" data-tab="varianten">Varianten<span class="badge" id="b-var"></span></button>
     <button role="tab" data-tab="check">Route-Check<span class="badge" id="b-check"></span></button>
     <button role="tab" data-tab="todos">To-dos<span class="badge" id="b-todos"></span></button>
     <button role="tab" data-tab="buchungen">Buchungen<span class="badge" id="b-book"></span></button>
     <button role="tab" data-tab="budget">Budget</button>
-    <button role="tab" data-tab="einreise">Einreise &amp; Gesundheit</button>
+    <button role="tab" data-tab="ausgaben">Ausgaben</button>
+    <button role="tab" data-tab="einreise">Einreise</button>
     <button role="tab" data-tab="packliste">Packliste<span class="badge" id="b-pack"></span></button>
   </div></nav>
 
   <!-- KARTE & ROUTE -->
   <section class="tab" id="tab-route">
+    <div class="panel variant-bar" id="variant-bar"></div>
     <div class="route-grid">
       <div class="panel mapbox">
         <div class="map-tools" id="regions"></div>
@@ -313,6 +365,15 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
     </div>
 
     <div class="legs" id="legs"></div>
+  </section>
+
+  <!-- VARIANTEN -->
+  <section class="tab" id="tab-varianten" hidden>
+    <div class="sec-head"><div><h2>Routen-Varianten</h2><p class="muted">Drei Möglichkeiten für Thailand, immer 28 Nächte von Bangkok bis zur Full Moon Party. Jeder wählt seinen Favoriten. Der Reiseplan bleibt unverändert, bis ihr euch entschieden habt.</p></div></div>
+    <div class="banner" id="var-agree" hidden></div>
+    <div class="var-grid" id="var-grid"></div>
+    <div class="panel" style="margin-top:16px"><div style="padding:14px 16px 4px"><h3>Direkter Vergleich</h3></div><div class="tbl" id="var-table"></div></div>
+    <div class="panel card" style="margin-top:16px"><h3>Notizen zur Entscheidung</h3><p class="muted" style="font-size:.86rem">Für euch beide sichtbar. Wird beim Verlassen des Feldes gespeichert.</p><textarea id="var-notes" rows="4" style="margin-top:8px" placeholder="z. B. Muay Thai ist uns wichtig, Khao Sok eher nicht"></textarea></div>
   </section>
 
   <!-- ROUTE-CHECK -->
@@ -386,6 +447,40 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
         </ul>
       </div>
     </div>
+  </section>
+
+  <!-- AUSGABEN -->
+  <section class="tab" id="tab-ausgaben" hidden>
+    <div class="sec-head"><div><h2>Ausgaben</h2><p class="muted">Tragt unterwegs ein, was ihr ausgebt. Ihr seht, wie ihr im Vergleich zur Schätzung liegt und wer wem wie viel schuldet.</p></div></div>
+    <div class="stats five" id="exp-stats" style="margin-top:0"></div>
+    <div class="check-grid" style="margin-top:16px">
+      <form class="panel card" id="exp-add">
+        <h3 style="margin-bottom:10px">Ausgabe eintragen</h3>
+        <div class="expform">
+          <label><span class="lbl">Betrag</span><input type="number" id="exp-amt" min="0" step="any" inputmode="decimal" required placeholder="0"></label>
+          <label><span class="lbl">Währung</span><select id="exp-cur"></select></label>
+          <label><span class="lbl">Datum</span><input type="date" id="exp-d" required></label>
+          <label><span class="lbl">Land</span><select id="exp-c"></select></label>
+          <label><span class="lbl">Kategorie</span><select id="exp-cat"></select></label>
+          <label><span class="lbl">Bezahlt von</span><select id="exp-by"></select></label>
+          <label><span class="lbl">Für</span><select id="exp-for"></select></label>
+          <label><span class="lbl">Notiz</span><input type="text" id="exp-note" placeholder="z. B. Hostel Chiang Mai"></label>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:12px"><button class="btn primary">Eintragen</button><span class="muted mono" id="exp-preview" style="font-size:.84rem"></span></div>
+      </form>
+      <div class="panel card"><h3>Abrechnung</h3><div id="exp-settle"></div></div>
+    </div>
+    <div class="panel budget" style="margin-top:16px"><h3>Soll und Ist pro Land</h3><p class="muted" style="font-size:.84rem">Tageskosten pro Person (Unterkunft, Essen, Transport vor Ort, Eintritte, Sonstiges). Das helle Band ist die Schätzung, der Strich euer Ist-Wert.</p><div id="exp-vs" style="margin-top:8px"></div></div>
+    <div class="panel budget" style="margin-top:16px"><h3>Nach Kategorie</h3><div id="exp-cats"></div></div>
+    <div class="panel items" style="margin-top:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap"><h3>Alle Einträge</h3><select id="exp-filter" aria-label="Nach Land filtern"></select></div>
+      <div id="exp-list"></div>
+    </div>
+    <details class="panel card" style="margin-top:16px"><summary style="cursor:pointer;font-weight:600">Wechselkurse</summary>
+      <p class="muted" style="font-size:.84rem;margin-top:6px">Grobe Richtwerte zum Start, nicht tagesaktuell. Vor und während der Reise anpassen, alle Euro-Werte rechnen sich dann neu.</p>
+      <div class="rates" id="rates"></div>
+      <button class="btn small" id="rates-save" style="margin-top:10px">Kurse speichern</button>
+    </details>
   </section>
 
   <!-- EINREISE -->
@@ -467,7 +562,7 @@ const C = {
   XX: { n:'Transit',     visa:0 }
 };
 // mode: wie man ANKOMMT. path: Zwischenpunkte [lat, lon, Modus des Abschnitts bis dorthin].
-const STOPS = [
+const BASE = [
   {id:'negombo',c:'LK',n:'Negombo',k:1,ll:[7.21,79.84],mode:'flug',via:'Flug Frankfurt → Colombo',hl:['Ankommen, erholen','Nah am Flughafen Colombo']},
   {id:'sigiriya',c:'LK',n:'Sigiriya & Dambulla',k:3,ll:[7.957,80.76],mode:'auto',via:'Bus oder Fahrer',hl:['Löwenfelsen Sigiriya','Höhlentempel Dambulla','Jeep-Safari Minneriya oder Kaudulla mit großen Elefantenherden'],tip:'Safari über die Unterkunft buchen. Die frühe Tour ab Sonnenaufgang bringt die besten Sichtungen.'},
   {id:'kandy',c:'LK',n:'Kandy',k:1,ll:[7.29,80.63],mode:'bus',via:'Bus',hl:['Zahntempel','Danach Zug Richtung Ella']},
@@ -517,18 +612,49 @@ const TRIPS = [
   ['Ayutthaya',14.35,100.57],['Chiang Rai',19.91,99.83],['Koh Phi Phi',7.74,98.77],['Ang Thong',9.62,99.68],
   ['Minneriya',8.03,80.88],['Mekong-Delta',10.36,106.36],['Nara',34.68,135.80],['Hiroshima',34.39,132.46],['Padar',-8.65,119.57],['Komodo',-8.55,119.45]
 ];
-let acc = 0;
-STOPS.forEach((s, i) => { s.i = i; s.start = acc; acc += s.k; s.end = acc; });
-const NIGHTS = acc; // 119
-const ctryRange = {};
-STOPS.forEach(s => { if (s.c === 'XX') return; const r = ctryRange[s.c] ||= { start: s.start, end: s.end, nights: 0, stops: [] }; r.end = s.end; r.nights += s.k; r.stops.push(s); });
+/* ---------- Routen-Varianten (nur Thailand unterscheidet sich, immer 28 Nächte) ---------- */
+const TH_IDS = ['bangkok','chiangmai','pai','phuket','lanta','khaosok','kohtao','samui','phangan'];
+const B = (id, over = {}) => ({ ...BASE.find(s => s.id === id), ...over });
+const LANTA_VIA_KRABI = { mode:'faehre', path:[[18.77,98.96,'bus'],[8.10,98.98,'flug']], via:'Minibus nach Chiang Mai, Flug nach Krabi, Minibus und Fähre' };
+const PHANGAN_LONG = { k:5, via:'Fähre Koh Tao → Koh Phangan', hl:['Full Moon Party am Haad Rin Beach, Nacht 22./23. März','Tagestour Ang Thong Marine Park','Ruhige Strände im Norden zum Runterkommen'], tip:'Mit 5 Nächten in der Party-Woche fällt das Problem mit dem Mindestaufenthalt weg. Trotzdem früh buchen, die Woche ist teurer. Tipp: ruhige Unterkunft im Norden, abends nach Haad Rin.' };
+const CM_TRAIN = { hl:[...BASE.find(s => s.id === 'chiangmai').hl, 'Muay-Thai-Training in einem Gym (ersetzt Phuket)'] };
+const VARIANTS = [
+  { id:'plan', n:'Aktueller Plan', sub:'9 Stationen in Thailand, so wie im Reiseplan',
+    th: TH_IDS.map(id => B(id)),
+    pro:['Maximale Vielfalt: Phuket, Khao Sok und Samui sind dabei','Muay-Thai-Training an der Soi Ta-iad'],
+    con:['Alle 3 Tage ein Ortswechsel, oft mit halbem Reisetag','Koh Phangan nur 1 Nacht: Mindestaufenthalt in der Party-Woche ist ein Problem'] },
+  { id:'ruhig', n:'Thailand ruhiger', sub:'6 Stationen, längere Aufenthalte',
+    th: [B('bangkok'), B('chiangmai', CM_TRAIN), B('pai', { k:4 }), B('lanta', { k:7, ...LANTA_VIA_KRABI, hl:['Strände und Zeit zum Entspannen','Schnorcheltour Koh Rok und Koh Haa','Tagestour Koh Phi Phi und Maya Bay'] }), B('kohtao', { k:5, path:[[10.49,99.18,'bus']], via:'Minibus und Fähre über Chumphon oder Surat Thani, ganzer Reisetag' }), B('phangan', PHANGAN_LONG)],
+    pro:['Nur 5 Ortswechsel statt 8','Koh Phangan mit 5 Nächten: kein Ärger mit Mindestaufenthalt','Koh Lanta 7 Nächte: Zeit für Ausflüge und echte Ruhetage'],
+    con:['Phuket, Khao Sok und Samui fallen weg','Koh Lanta → Koh Tao ist ein langer Reisetag','Party-Woche auf Koh Phangan ist pro Nacht teurer'] },
+  { id:'ruhigks', n:'Ruhiger mit Khao Sok', sub:'7 Stationen, Dschungel bleibt drin',
+    th: [B('bangkok'), B('chiangmai', CM_TRAIN), B('pai', { k:4 }), B('lanta', { k:5, ...LANTA_VIA_KRABI }), B('khaosok'), B('kohtao', { k:5 }), B('phangan', PHANGAN_LONG)],
+    pro:['Dschungel und Nacht auf dem Cheow-Lan-See bleiben','Khao Sok teilt die lange Strecke Koh Lanta → Koh Tao in zwei Etappen','Koh Phangan mit 5 Nächten'],
+    con:['6 Ortswechsel','Koh Lanta nur 5 Nächte','Phuket und Samui fallen weg'] }
+];
+let STOPS = [], ctryRange = {}, variant = 'plan';
+function buildStops(v) {
+  variant = VARIANTS.some(x => x.id === v) ? v : 'plan';
+  const th = VARIANTS.find(x => x.id === variant).th;
+  const i0 = BASE.findIndex(s => s.id === 'bangkok'), i1 = BASE.findIndex(s => s.id === 'phangan');
+  STOPS = [...BASE.slice(0, i0), ...th, ...BASE.slice(i1 + 1)].map(s => ({ ...s }));
+  let acc = 0;
+  STOPS.forEach((s, i) => { s.i = i; s.start = acc; acc += s.k; s.end = acc; });
+  ctryRange = {};
+  STOPS.forEach(s => { if (s.c === 'XX') return; const r = ctryRange[s.c] ||= { start: s.start, end: s.end, nights: 0, stops: [] }; r.end = s.end; r.nights += s.k; r.stops.push(s); });
+  return acc;
+}
+const NIGHTS = buildStops(store.get('ar27.variant') || 'plan'); // 119, in jeder Variante gleich
 const stopAt = d => STOPS.find(s => d >= s.start && d < s.end) || (d >= NIGHTS ? STOPS[STOPS.length - 1] : STOPS[0]);
 
 const MODE_TXT = { flug:'Flug', zug:'Zug', bus:'Bus', auto:'Auto', faehre:'Fähre', boot:'Boot' };
 
 /* ---------- Buchungsliste ---------- */
-const S = id => STOPS.find(s => s.id === id).start;
-const BOOKINGS = [
+const S = id => STOPS.find(s => s.id === id)?.start;
+let BOOKINGS = [];
+function buildBookings() {
+  const ph = STOPS.find(s => s.id === 'phangan');
+  BOOKINGS = [
   {id:'ice-hin', d:-1, m:'zug', t:'ICE Hamburg → Frankfurt', x:'Rail&Fly beim Flug prüfen, sonst Sparpreis'},
   {id:'hotel-fra', d:-1, m:'hotel', t:'Hotel Frankfurt, 1 Nacht', x:'Flughafen oder Hauptbahnhof'},
   {id:'lh-hin', d:0, m:'flug', t:'Langstrecke Frankfurt → Colombo', x:'Ankunftszeit prüfen (9. oder 10. Feb)'},
@@ -537,8 +663,9 @@ const BOOKINGS = [
   {id:'cmb-bkk', d:S('bangkok'), m:'flug', t:'Colombo → Bangkok'},
   {id:'zug-cnx', d:S('chiangmai'), m:'zug', t:'Nachtzug Bangkok → Chiang Mai', x:'Schlafwagen ist oft früh ausgebucht'},
   {id:'cnx-hkt', d:S('phuket'), m:'flug', t:'Chiang Mai → Phuket'},
+  {id:'cnx-kbv', d:S('phuket') == null ? S('lanta') : undefined, m:'flug', t:'Chiang Mai → Krabi', x:'Direktverbindung prüfen'},
   {id:'samui', d:S('samui'), m:'hotel', t:'Koh Samui, 18. bis 21. März'},
-  {id:'phangan', d:S('phangan'), m:'hotel', t:'Koh Phangan, 1 Nacht zur Full Moon Party', x:'Mindestaufenthalt prüfen'},
+  {id:'phangan', d:ph.start, m:'hotel', t:`Koh Phangan, ${ph.k === 1 ? '1 Nacht' : ph.k + ' Nächte'} zur Full Moon Party`, x: ph.k === 1 ? 'Mindestaufenthalt prüfen' : 'Party-Woche, früh buchen'},
   {id:'urt-han', d:S('transit'), m:'flug', t:'Surat Thani oder Samui → Bangkok → Hanoi', x:'Nicht vor dem Nachmittag des 23. März'},
   {id:'hagiang', d:S('hagiang'), m:'tour', t:'Ha Giang Loop mit Easy Rider', x:'Vor Ort in Hanoi oder Ha Giang'},
   {id:'zug-hue', d:S('hue'), m:'zug', t:'Nachtzug Ninh Binh → Hue'},
@@ -558,11 +685,14 @@ const BOOKINGS = [
   {id:'boot', d:S('boot'), m:'boot', t:'Bootstour Lombok → Labuan Bajo, private Kabine', x:'1 bis 2 Monate vorher, Ende Mai ist Hochsaison'},
   {id:'lbj-dps', d:S('bali'), m:'flug', t:'Labuan Bajo → Bali'},
   {id:'dps-ham', d:NIGHTS, m:'flug', t:'Rückflug Bali → Hamburg oder Frankfurt', x:'Hamburg mit einem Umstieg bevorzugt'}
-];
+  ].filter(b => b.d != null);
+}
+buildBookings();
 const BK_ICON = { flug:'Flug', zug:'Zug', bus:'Bus', faehre:'Fähre', boot:'Boot', hotel:'Bett', tour:'Tour', doc:'Doku' };
 const FLIGHT_SEGMENTS = 14; // regionale Segmente inkl. Umstiege, siehe Route-Check
 
 /* ---------- Funde ---------- */
+const activeFindings = () => FINDINGS.filter(f => !f.onlyIn || f.onlyIn.includes(variant));
 const SEV = { kritisch:['Kritisch','var(--bad)'], pruefen:['Prüfen','var(--warn)'], hinweis:['Hinweis','var(--info)'], option:['Option','var(--opt)'] };
 const FINDINGS = [
   {id:'transit23', sev:'kritisch', stop:'transit', t:'Die Nacht vom 23. auf den 24. März fehlt im Plan',
@@ -604,7 +734,7 @@ const FINDINGS = [
   {id:'jrpass', sev:'hinweis', stop:'kyoto', t:'Japan Rail Pass rechnet sich wahrscheinlich nicht',
    d:'Eure Strecke ist Tokio → Hakone → Kyoto → Osaka plus Tagesausflug Hiroshima. Seit der Preiserhöhung 2023 sind Einzeltickets auf so einer Route meist günstiger als der 7-Tage-Pass.',
    fix:'Mit einem Japan-Routenrechner (z. B. Navitime oder Jorudan) die Einzelpreise summieren und mit dem Pass vergleichen.', todo:{t:'Japan: Einzeltickets vs. JR Pass durchrechnen', g:'2026-12', due:'2026-12-31'}},
-  {id:'tempo', sev:'option', stop:'phuket', t:'Thailand-Süden ist sehr dicht',
+  {id:'tempo', onlyIn:['plan'], sev:'option', stop:'phuket', t:'Thailand-Süden ist sehr dicht',
    d:'Phuket, Koh Lanta, Khao Sok, Koh Tao, Koh Samui und Koh Phangan in 18 Nächten: alle 3 Tage ein Ortswechsel, oft mit halbem Reisetag.',
    fix:'Phuket streichen und die 3 Nächte auf Koh Lanta und Khao Sok verteilen. Muay-Thai-Training geht auch in Bangkok oder Chiang Mai. Koh Phi Phi liegt ohnehin auf der Fähre nach Koh Lanta.'},
   {id:'siargao', sev:'option', stop:'siargao', t:'Siargao streichen, Palawan verlängern',
@@ -661,7 +791,7 @@ const GROUPS = [['2026-10','Oktober 2026'],['2026-11','November 2026'],['2026-12
 const state = {
   sel: 0, day: Math.min(Math.max(TODAY, 0), NIGHTS - 1),
   names: { a: 'Matti', b: 'Partner' }, pass: { a: '', b: '' },
-  todos: [], pack: [], bookings: {}, checks: {},
+  todos: [], pack: [], bookings: {}, checks: {}, exp: [], rates: {}, votes: { a: '', b: '' }, varNotes: '',
   todoFilter: store.get('ar27.todoFilter') || 'open',
   db: null, canWrite: false, dbReady: false
 };
@@ -687,13 +817,13 @@ function renderHeader() {
   $('#names-line').textContent = state.names.a + ' & ' + state.names.b;
   $('#b-todos').textContent = state.dbReady ? open : '';
   $('#b-book').textContent = state.dbReady ? booked + '/' + BOOKINGS.length : '';
-  const openFind = FINDINGS.filter(f => (f.sev === 'kritisch' || f.sev === 'pruefen') && !['erledigt','ignoriert'].includes(state.checks[f.id]?.s)).length;
+  const openFind = activeFindings().filter(f => (f.sev === 'kritisch' || f.sev === 'pruefen') && !['erledigt','ignoriert'].includes(state.checks[f.id]?.s)).length;
   $('#b-check').textContent = openFind || '';
   const pk = state.pack.length; $('#b-pack').textContent = state.dbReady && pk ? state.pack.filter(p => p.a && p.b).length + '/' + pk : '';
 }
 
 /* ========== Tabs ========== */
-const TABS = ['route','check','todos','buchungen','budget','einreise','packliste'];
+const TABS = ['route','varianten','check','todos','buchungen','budget','ausgaben','einreise','packliste'];
 function showTab(id) {
   if (!TABS.includes(id)) id = 'route';
   $$('#tablist button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === id)));
@@ -721,7 +851,7 @@ function segPath(a, b, mode) {
   return `M${a[0].toFixed(2)},${a[1].toFixed(2)}Q${(mx - dy * k).toFixed(2)},${(my + dx * k).toFixed(2)} ${b[0].toFixed(2)},${b[1].toFixed(2)}`;
 }
 const segClass = m => m === 'flug' ? 'flug' : (m === 'faehre' || m === 'boot') ? 'water' : 'ground';
-(function drawRoute() {
+function drawRoute() {
   let h = '';
   const off1 = P(24, 70), off2 = P(2, 70);
   h += `<path class="seg flug" d="${segPath(off1, P(...STOPS[0].ll), 'flug')}"/>`;
@@ -737,7 +867,8 @@ const segClass = m => m === 'flug' ? 'flug' : (m === 'faehre' || m === 'boot') ?
   }
   h += `<path class="seg flug" d="${segPath(P(...STOPS[STOPS.length - 1].ll), off2, 'flug')}"/>`;
   $('#g-route').innerHTML = h;
-})();
+}
+drawRoute();
 
 let vb = { x: 0, y: 0, w: MAP.W, h: MAP.H };
 const setVB = () => svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
@@ -886,17 +1017,18 @@ const EVENTS = [
   { d: idxISO('2027-04-29'), t: 'Golden Week Japan (ihr seid weg)' }, { d: idxISO('2027-05-16'), t: 'Eid al-Adha (vorauss.)' },
   { d: S('boot'), t: 'Start Bootstour' }, { d: NIGHTS, t: 'Rückflug DPS → HAM' }
 ];
-(function renderBand() {
+function renderBand() {
   $('#band').innerHTML = STOPS.map(s => `<button data-i="${s.i}" class="${s.gap ? 'gap' : ''}" style="flex:${s.k} 1 0;background:var(--c-${s.c})" title="${esc(s.n)} · ${fmt(s.start)} · ${s.k} N." aria-label="${esc(s.n)}, ${fmt(s.start)}, ${s.k} Nächte"></button>`).join('') + `<div class="band-cursor" id="band-cursor"></div>`;
   const parts = []; let last = null;
   STOPS.forEach(s => { if (last && last.c === s.c) last.k += s.k; else { last = { c: s.c, k: s.k }; parts.push(last); } });
   $('#band-ctry').innerHTML = parts.map(p => `<span style="flex:${p.k} 1 0;color:var(--c-${p.c})">${p.k >= 6 ? esc(C[p.c].n) : p.c === 'XX' ? '' : p.c}</span>`).join('');
   $('#band-months').innerHTML = [['2027-02-09','9. Feb'],['2027-03-01','Mär'],['2027-04-01','Apr'],['2027-05-01','Mai'],['2027-06-01','Jun']].map(([iso, t]) => `<span style="left:${idxISO(iso) / NIGHTS * 100}%">${t}</span>`).join('');
   $('#events').innerHTML = EVENTS.map(e => `<span class="chip"><span class="mono">${e.d < 0 ? '8. Feb' : fmt(e.d)}</span> ${esc(e.t)}</span>`).join('');
-})();
+}
+renderBand();
 $('#band').addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (b) selectStop(+b.dataset.i); });
 
-(function renderLegs() {
+function renderLegs() {
   const order = ['LK','TH','XX','VN','JP','PH','MY','SG','ID'];
   $('#legs').innerHTML = order.map(c => {
     const stops = STOPS.filter(s => s.c === c); if (!stops.length) return '';
@@ -904,7 +1036,8 @@ $('#band').addEventListener('click', e => { const b = e.target.closest('button[d
     return `<div class="panel leg-ctry" style="--cc:var(--c-${c})"><div class="hd"><div class="bar"></div><div class="t"><h3>${esc(C[c].n)}</h3>${C[c].why ? `<p>${esc(C[c].why)}</p>` : '<p>Noch offen, siehe Route-Check</p>'}</div><div class="meta">${fmt(a)} – ${fmt(b)}<br><span class="muted">${n} ${n === 1 ? 'Nacht' : 'Nächte'}</span></div></div>
       <ol>${stops.map(s => `<li><button data-i="${s.i}"><span class="d">${fmt(s.start)}</span><span class="mono muted num">${s.i + 1}</span><span><b>${esc(s.n)}</b><span class="via"><span class="mode">${MODE_TXT[s.mode]}</span> ${esc(s.via)}</span></span><span class="n">${s.k} N.</span></button></li>`).join('')}</ol></div>`;
   }).join('');
-})();
+}
+renderLegs();
 $('#legs').addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (b) { selectStop(+b.dataset.i); $('#map').scrollIntoView({ behavior: 'smooth', block: 'center' }); } });
 function markLists() {
   $$('#legs button[data-i], #band button[data-i]').forEach(b => b.classList.toggle('sel', +b.dataset.i === state.sel));
@@ -935,14 +1068,14 @@ function renderCheck() {
     return `<div class="row"><span>${esc(C[c].n)}</span><div class="track"><div class="fill" style="width:${p}%;background:${col}"></div></div><span class="mono" style="text-align:right">${days}/${lim}</span></div>`;
   }).join('');
 
-  $('#findings').innerHTML = FINDINGS.map(f => {
+  $('#findings').innerHTML = activeFindings().map(f => {
     const st = state.checks[f.id]?.s || 'offen', [lab, col] = SEV[f.sev];
     const done = st === 'erledigt' || st === 'ignoriert';
     const acts = !state.canWrite ? '' : done
       ? `<button class="btn small" data-act="reset" data-id="${f.id}">Wieder öffnen</button>`
       : `${f.todo && st !== 'todo' ? `<button class="btn small primary" data-act="todo" data-id="${f.id}">Als To-do übernehmen</button>` : ''}<button class="btn small" data-act="erledigt" data-id="${f.id}">Erledigt</button><button class="btn small" data-act="ignoriert" data-id="${f.id}">Verwerfen</button>`;
     return `<article class="panel finding${done ? ' done' : ''}" style="--sc:${col}"><div class="sev"></div><div class="in">
-      <div class="top"><span class="chip sevchip">${lab}</span>${st !== 'offen' ? `<span class="chip">${st === 'todo' ? 'als To-do übernommen' : st}</span>` : ''}${f.stop ? `<button class="iconbtn" data-goto="${f.stop}">auf Karte zeigen</button>` : ''}</div>
+      <div class="top"><span class="chip sevchip">${lab}</span>${st !== 'offen' ? `<span class="chip">${st === 'todo' ? 'als To-do übernommen' : st}</span>` : ''}${f.stop && STOPS.some(s => s.id === f.stop) ? `<button class="iconbtn" data-goto="${f.stop}">auf Karte zeigen</button>` : ''}</div>
       <h3>${esc(f.t)}</h3><p class="muted" style="font-size:.9rem">${esc(f.d)}</p><p class="fix"><b>Vorschlag:</b> ${esc(f.fix)}</p>
       <div class="acts">${acts}</div></div></article>`;
   }).join('');
@@ -951,7 +1084,7 @@ function renderCheck() {
 }
 $('#findings').addEventListener('click', async e => {
   const g = e.target.closest('[data-goto]');
-  if (g) { showTab('route'); history.replaceState(null, '', '#route'); selectStop(STOPS.find(s => s.id === g.dataset.goto).i); return; }
+  if (g) { showTab('route'); history.replaceState(null, '', '#route'); const st = STOPS.find(s => s.id === g.dataset.goto); if (st) selectStop(st.i); return; }
   const b = e.target.closest('[data-act]'); if (!b || !state.db) return;
   const f = FINDINGS.find(x => x.id === b.dataset.id); b.disabled = true;
   try {
@@ -1108,12 +1241,213 @@ $('#pack-add').addEventListener('submit', async e => {
 
 function renderWho() { $('#todo-who').innerHTML = `<option value="ab">Beide</option><option value="a">${esc(state.names.a)}</option><option value="b">${esc(state.names.b)}</option>`; }
 
+/* ========== Varianten ========== */
+function variantStats(v) {
+  const th = v.th, plan = VARIANTS[0].th, ids = th.map(s => s.id);
+  const nights = th.reduce((x, s) => x + s.k, 0), longest = th.reduce((a, s) => s.k > a.k ? s : a, th[0]);
+  const dropped = plan.filter(s => !ids.includes(s.id)).map(s => s.n);
+  const longer = th.filter(s => { const p = plan.find(x => x.id === s.id); return p && s.k > p.k; }).map(s => `${s.n} +${s.k - plan.find(x => x.id === s.id).k}`);
+  return { n: th.length, moves: th.length - 1, avg: nights / th.length, longest, dropped, longer, total: BASE.length - plan.length + th.length };
+}
+function renderVariantBar() {
+  const v = VARIANTS.find(x => x.id === variant);
+  $('#variant-bar').innerHTML = `<span class="lbl">Thailand-Variante</span><div class="seg-ctl" id="var-switch">${VARIANTS.map(x => `<button type="button" data-v="${x.id}" class="${x.id === variant ? 'on' : ''}">${esc(x.n)}</button>`).join('')}</div>
+    <span class="note">${variant === 'plan' ? 'Ihr seht den aktuellen Reiseplan.' : `<b>Vorschau:</b> ${esc(v.n)}. Der Reiseplan selbst ist unverändert.`} <button class="iconbtn" data-tabjump="varianten">Varianten vergleichen</button></span>`;
+}
+function setVariant(v) {
+  buildStops(v); store.set('ar27.variant', variant); buildBookings();
+  drawRoute(); renderBand(); renderLegs();
+  state.sel = stopAt(state.day).i;
+  renderAll(); renderDay(); drawOverlay(); markLists();
+}
+document.addEventListener('click', e => {
+  const sw = e.target.closest('#var-switch button[data-v], [data-showvar]');
+  if (sw) { setVariant(sw.dataset.v || sw.dataset.showvar); if (sw.dataset.showvar) { showTab('route'); history.replaceState(null, '', '#route'); goRegion('TH'); } return; }
+  const tj = e.target.closest('[data-tabjump]');
+  if (tj) { showTab(tj.dataset.tabjump); history.replaceState(null, '', '#' + tj.dataset.tabjump); }
+});
+function renderVariants() {
+  const votes = state.votes, nm = state.names;
+  const agree = votes.a && votes.a === votes.b ? VARIANTS.find(x => x.id === votes.a) : null;
+  $('#var-agree').hidden = !agree;
+  if (agree) $('#var-agree').innerHTML = `<b>Ihr seid euch einig: ${esc(agree.n)}.</b> Sag Claude Bescheid, dann wird der Reiseplan mit Buchungen und Route-Check umgestellt.`;
+  $('#b-var').textContent = agree ? '✓' : [votes.a, votes.b].filter(Boolean).length ? [votes.a, votes.b].filter(Boolean).length + '/2' : '';
+  const ro = state.canWrite && state.db ? '' : ' disabled';
+  $('#var-grid').innerHTML = VARIANTS.map(v => {
+    const st = variantStats(v);
+    const favs = ['a', 'b'].filter(w => votes[w] === v.id).map(w => `<span class="chip fav">★ ${esc(nm[w])}</span>`).join('');
+    return `<article class="panel var-card${v.id === variant ? ' shown' : ''}">
+      <div><h3>${esc(v.n)}</h3><p class="muted" style="font-size:.86rem">${esc(v.sub)}</p></div>
+      <div class="favs">${favs || '<span class="muted" style="font-size:.82rem">Noch kein Favorit</span>'}</div>
+      <div><div class="mini" role="img" aria-label="Thailand-Stationen: ${esc(v.th.map(s => s.n + ' ' + s.k + ' Nächte').join(', '))}">${v.th.map(s => `<span style="flex:${s.k} 1 0" title="${esc(s.n)}, ${s.k} Nächte">${esc(s.n.replace('Koh ', 'K. '))}<small>${s.k}</small></span>`).join('')}</div>
+        <div class="mono muted" style="font-size:.72rem;display:flex;justify-content:space-between;margin-top:3px"><span>23. Feb</span><span>23. Mär</span></div></div>
+      <div class="mono" style="font-size:.84rem">${st.n} Stationen · ${st.moves} Ortswechsel · Ø ${st.avg.toFixed(1).replace('.', ',')} Nächte</div>
+      <ul class="pc pro">${v.pro.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+      <ul class="pc con">${v.con.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+      <div class="votes"><button class="btn small" data-showvar="${v.id}">Auf der Karte ansehen</button>${['a', 'b'].map(w => `<button class="btn small vote${votes[w] === v.id ? ' on' : ''}" data-vote="${w}" data-v="${v.id}"${ro}>${votes[w] === v.id ? '★' : '☆'} ${esc(nm[w])}</button>`).join('')}</div>
+    </article>`;
+  }).join('');
+  const rows = [
+    ['Stationen in Thailand', v => variantStats(v).n],
+    ['Ortswechsel in Thailand', v => variantStats(v).moves],
+    ['Ø Nächte pro Station', v => variantStats(v).avg.toFixed(1).replace('.', ',')],
+    ['Längster Aufenthalt', v => { const l = variantStats(v).longest; return `${esc(l.n)} (${l.k})`; }],
+    ['Stationen gesamt', v => variantStats(v).total],
+    ['Fällt weg', v => esc(variantStats(v).dropped.join(', ') || '–')],
+    ['Länger', v => esc(variantStats(v).longer.join(', ') || '–')],
+    ['Koh Phangan', v => { const p = v.th.find(s => s.id === 'phangan'); return p.k === 1 ? '1 Nacht, Mindestaufenthalt prüfen' : p.k + ' Nächte, ganze Party-Woche'; }]
+  ];
+  $('#var-table').innerHTML = `<table class="t"><thead><tr><th></th>${VARIANTS.map(v => `<th>${esc(v.n)}</th>`).join('')}</tr></thead><tbody>${rows.map(([l, f]) => `<tr><td class="muted">${l}</td>${VARIANTS.map(v => `<td>${f(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  const ta = $('#var-notes'); if (document.activeElement !== ta) ta.value = state.varNotes; ta.disabled = !(state.canWrite && state.db);
+}
+$('#var-grid').addEventListener('click', async e => {
+  const b = e.target.closest('[data-vote]'); if (!b || !state.db) return;
+  const w = b.dataset.vote, v = b.dataset.v;
+  try { await state.db.doc('varianten/stimmen').set({ a: state.votes.a || '', b: state.votes.b || '', [w]: state.votes[w] === v ? '' : v }); } catch (err) { writeFailed(err); }
+});
+$('#var-notes').addEventListener('change', async e => {
+  if (!state.db) return;
+  try { await state.db.doc('varianten/notizen').set({ t: e.target.value.slice(0, 5000) }); } catch (err) { writeFailed(err); }
+});
+
+/* ========== Ausgaben ========== */
+const CURS = ['EUR','LKR','THB','VND','JPY','PHP','MYR','SGD','IDR'];
+const CUR_OF = { VOR:'EUR', LK:'LKR', TH:'THB', XX:'THB', VN:'VND', JP:'JPY', PH:'PHP', MY:'MYR', SG:'SGD', ID:'IDR' };
+const DEFAULT_RATES = { LKR:330, THB:37, VND:28000, JPY:165, PHP:64, MYR:4.9, SGD:1.48, IDR:18500 };
+const CATS = [
+  ['unterkunft','Unterkunft','var(--c-PH)',true], ['essen','Essen & Trinken','var(--c-LK)',true], ['transport','Transport vor Ort','var(--c-VN)',true],
+  ['eintritt','Eintritte & Kleines','var(--c-TH)',true], ['touren','Touren & Aktivitäten','var(--c-ID)',false], ['fernverkehr','Flüge & Fernverkehr','var(--c-MY)',false],
+  ['sonstiges','Sonstiges','var(--c-XX)',true]
+];
+const EXP_C = [['VOR','Vorab (Deutschland)'],['LK','Sri Lanka'],['TH','Thailand'],['VN','Vietnam'],['JP','Japan'],['PH','Philippinen'],['MY','Malaysia'],['SG','Singapur'],['ID','Indonesien']];
+const catOf = id => CATS.find(c => c[0] === id) || ['ausgleich','Ausgleich','var(--muted)',false];
+const autoCountry = iso => { const i = idxISO(iso); if (i < 0) return 'VOR'; const c = stopAt(Math.min(i, NIGHTS - 1)).c; return c === 'XX' ? 'TH' : c; };
+const rateOf = cur => +state.rates[cur] || DEFAULT_RATES[cur];
+const eurOf = e => e.cur === 'EUR' ? +e.amt : +e.amt / rateOf(e.cur);
+const fmtEUR = v => isFinite(v) ? v.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €' : '–';
+const fmtAmt = (a, cur) => (+a).toLocaleString('de-DE', { maximumFractionDigits: ['EUR','SGD','MYR'].includes(cur) ? 2 : 0 }) + ' ' + cur;
+
+function expCalc() {
+  const paid = { a: 0, b: 0 }, owe = { a: 0, b: 0 }, share = { a: 0, b: 0 }, byCat = {}, byC = {};
+  let total = 0;
+  for (const e of state.exp) {
+    const v = eurOf(e); if (!isFinite(v) || !(e.by in paid)) continue;
+    paid[e.by] += v;
+    if (e.for === 'ab') { owe.a += v / 2; owe.b += v / 2; } else if (e.for in owe) owe[e.for] += v;
+    if (e.cat === 'ausgleich') continue;
+    total += v;
+    if (e.for === 'ab') { share.a += v / 2; share.b += v / 2; } else if (e.for in share) share[e.for] += v;
+    byCat[e.cat] = (byCat[e.cat] || 0) + v;
+    if (catOf(e.cat)[3]) { const c = byC[e.c] ||= { sum: 0, dates: new Set() }; c.sum += v; c.dates.add(e.d); }
+  }
+  return { paid, owe, share, total, byCat, byC, net: paid.a - owe.a };
+}
+function expDays(c, info) {
+  const r = c === 'TH' ? { start: ctryRange.TH.start, nights: ctryRange.TH.nights + 1 } : ctryRange[c];
+  if (!r) return 0;
+  const el = Math.min(Math.max(TODAY - r.start, 0), r.nights);
+  return el > 0 ? el : (info ? info.dates.size : 0);
+}
+function renderExpenses() {
+  const nm = state.names, x = expCalc();
+  const tripDaily = Object.entries(x.byC).filter(([c]) => c !== 'VOR');
+  const tripSum = tripDaily.reduce((a, [, i]) => a + i.sum, 0);
+  const tripDays = TODAY > 0 ? Math.min(TODAY, NIGHTS) : new Set(tripDaily.flatMap(([, i]) => [...i.dates])).size;
+  $('#exp-stats').innerHTML = [
+    [fmtEUR(x.total), 'gesamt ausgegeben'],
+    [fmtEUR(x.share.a), nm.a + ', persönlicher Anteil'],
+    [fmtEUR(x.share.b), nm.b + ', persönlicher Anteil'],
+    [tripDays ? fmtEUR(tripSum / 2 / tripDays) : '–', 'Ø Tageskosten pro Person'],
+    [String(state.exp.filter(e => e.cat !== 'ausgleich').length), 'Einträge']
+  ].map(([b, t]) => `<div><b class="mono">${esc(b)}</b><span>${esc(t)}</span></div>`).join('');
+
+  const debtor = x.net > 0 ? 'b' : 'a', creditor = debtor === 'a' ? 'b' : 'a', amt = Math.abs(x.net);
+  $('#exp-settle').innerHTML = !state.exp.length ? `<p class="muted">Noch keine Ausgaben. Sobald ihr etwas eintragt, steht hier, wer wem wie viel schuldet.</p>`
+    : amt < 0.005 ? `<div class="settle ok">Ihr seid quitt.</div>`
+    : `<div class="settle">${esc(nm[debtor])} schuldet ${esc(nm[creditor])} ${fmtEUR(amt)}</div>
+       <p class="muted" style="font-size:.86rem">Bezahlt: ${esc(nm.a)} ${fmtEUR(x.paid.a)}, ${esc(nm.b)} ${fmtEUR(x.paid.b)}. Gemeinsame Ausgaben werden halbiert.</p>
+       ${state.canWrite ? `<button class="btn small" id="exp-settle-btn" data-amt="${amt.toFixed(2)}" data-by="${debtor}" data-for="${creditor}" style="margin-top:10px">Ausgleich eintragen: ${esc(nm[debtor])} zahlt ${fmtEUR(amt)}</button>` : ''}`;
+
+  const max = 100;
+  $('#exp-vs').innerHTML = `<div class="baxis"><span></span><div class="ax">${[0,20,40,60,80,100].map(v => `<span>${v} €</span>`).join('')}</div><span></span></div>` + BUDGET.map(([c, , lo, hi]) => {
+    const info = x.byC[c], days = expDays(c, info), act = info && days ? info.sum / 2 / days : null;
+    const col = act == null ? 'var(--muted)' : act > hi ? 'var(--bad)' : act < lo ? 'var(--good)' : 'var(--ink)';
+    return `<div class="brow"><span><span class="dot" style="background:var(--c-${c});margin-right:6px"></span>${esc(C[c].n)}</span>
+      <div class="btrack"><div class="grid" style="background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 20%)"></div><div class="rng soft" style="left:${lo / max * 100}%;width:${(hi - lo) / max * 100}%;background:var(--c-${c})"></div>${act != null ? `<div class="act" style="left:${Math.min(act, max) / max * 100}%;background:${col}"></div>` : ''}</div>
+      <span class="mono" style="text-align:right;font-size:.82rem">${act != null ? `<span style="color:${col}">${fmtEUR(act)}</span> / Tag<br><span class="muted">${days} T., Soll ${lo}–${hi} €</span>` : `<span class="muted">Soll ${lo}–${hi} €</span>`}</span></div>`;
+  }).join('');
+
+  const cats = CATS.filter(c => x.byCat[c[0]]);
+  $('#exp-cats').innerHTML = !x.total ? `<p class="muted" style="margin-top:6px">Noch keine Daten.</p>` : `<div class="catbar">${cats.map(c => `<i style="width:${x.byCat[c[0]] / x.total * 100}%;background:${c[2]}" title="${esc(c[1])}"></i>`).join('')}</div>
+    <div class="catleg">${cats.map(c => `<div><span><span class="dot" style="background:${c[2]};margin-right:6px"></span>${esc(c[1])}</span><span class="mono">${fmtEUR(x.byCat[c[0]])} · ${Math.round(x.byCat[c[0]] / x.total * 100)} %</span></div>`).join('')}</div>`;
+
+  const f = $('#exp-filter').value || 'all';
+  const list = state.exp.filter(e => f === 'all' || e.c === f).sort((a, b) => a.d < b.d ? 1 : a.d > b.d ? -1 : (b.o || 0) - (a.o || 0));
+  const forTxt = w => w === 'ab' ? 'für beide' : 'für ' + nm[w];
+  $('#exp-list').innerHTML = !state.dbReady ? `<div class="empty">${state.db === null ? 'Ausgaben sind nur in der angemeldeten Ansicht verfügbar.' : 'Lade Ausgaben …'}</div>`
+    : !list.length ? `<div class="empty">${state.exp.length ? 'Keine Einträge für dieses Land.' : 'Noch keine Ausgaben. Trag oben die erste ein, zum Beispiel die Langstrecke, sobald sie gebucht ist.'}</div>`
+    : list.map(e => { const c = catOf(e.cat); return `<div class="exp" data-id="${esc(e.id)}"><span class="d">${fmtISO(e.d)}</span>
+      <div style="min-width:0"><div><span class="dot" style="background:${c[2]};margin-right:6px"></span><b>${esc(e.note || c[1])}</b></div><div class="muted" style="font-size:.8rem">${esc(c[1])} · ${esc((EXP_C.find(k => k[0] === e.c) || ['', ''])[1])} · ${esc(nm[e.by] || '')} zahlte ${forTxt(e.for)}</div></div>
+      <span class="amt">${fmtEUR(eurOf(e))}${e.cur !== 'EUR' ? `<small>${fmtAmt(e.amt, e.cur)}</small>` : ''}</span>
+      <span>${state.canWrite ? '<button class="iconbtn" data-act="del" aria-label="Eintrag löschen">✕</button>' : ''}</span></div>`; }).join('');
+
+  if (!$('#exp-by').options.length || $('#exp-by').dataset.n !== nm.a + nm.b) {
+    const keepBy = $('#exp-by').value, keepFor = $('#exp-for').value;
+    $('#exp-by').innerHTML = `<option value="a">${esc(nm.a)}</option><option value="b">${esc(nm.b)}</option>`;
+    $('#exp-for').innerHTML = `<option value="ab">Beide</option><option value="a">${esc(nm.a)}</option><option value="b">${esc(nm.b)}</option>`;
+    $('#exp-by').dataset.n = nm.a + nm.b; if (keepBy) $('#exp-by').value = keepBy; if (keepFor) $('#exp-for').value = keepFor;
+  }
+  if (!$('#rates').contains(document.activeElement)) $('#rates').innerHTML = CURS.slice(1).map(cur => `<label><span>1 € =</span><input type="number" step="any" min="0" id="rate-${cur}" value="${rateOf(cur)}"${state.canWrite && state.db ? '' : ' disabled'}><span class="mono">${cur}</span></label>`).join('');
+  $('#rates-save').hidden = !(state.canWrite && state.db);
+  ['exp-amt','exp-cur','exp-d','exp-c','exp-cat','exp-by','exp-for','exp-note'].forEach(id => { $('#' + id).disabled = !(state.canWrite && state.db); });
+  expPreview();
+}
+function expPreview() {
+  const a = +$('#exp-amt').value, cur = $('#exp-cur').value;
+  $('#exp-preview').textContent = a > 0 && cur !== 'EUR' ? '≈ ' + fmtEUR(a / rateOf(cur)) : '';
+}
+(function initExpForm() {
+  $('#exp-cur').innerHTML = CURS.map(c => `<option>${c}</option>`).join('');
+  $('#exp-c').innerHTML = EXP_C.map(([k, n]) => `<option value="${k}">${esc(n)}</option>`).join('');
+  $('#exp-cat').innerHTML = CATS.map(([k, n]) => `<option value="${k}">${esc(n)}</option>`).join('');
+  $('#exp-filter').innerHTML = `<option value="all">Alle Länder</option>` + EXP_C.map(([k, n]) => `<option value="${k}">${esc(n)}</option>`).join('');
+  const setDate = iso => { $('#exp-d').value = iso; const c = autoCountry(iso); $('#exp-c').value = c; $('#exp-cur').value = CUR_OF[c]; };
+  setDate(todayISO);
+  $('#exp-d').addEventListener('change', e => { if (e.target.value) setDate(e.target.value); expPreview(); });
+  $('#exp-c').addEventListener('change', e => { $('#exp-cur').value = CUR_OF[e.target.value]; expPreview(); });
+  $('#exp-amt').addEventListener('input', expPreview); $('#exp-cur').addEventListener('change', expPreview);
+  $('#exp-filter').addEventListener('change', renderExpenses);
+  $('#exp-add').addEventListener('submit', async e => {
+    e.preventDefault(); if (!state.db || !state.canWrite) return;
+    const amt = +$('#exp-amt').value; if (!(amt > 0)) return;
+    try {
+      await state.db.collection('ausgaben').add({ d: $('#exp-d').value, amt, cur: $('#exp-cur').value, cat: $('#exp-cat').value, c: $('#exp-c').value, by: $('#exp-by').value, for: $('#exp-for').value, note: $('#exp-note').value.trim().slice(0, 200), o: Date.now() });
+      $('#exp-amt').value = ''; $('#exp-note').value = ''; expPreview(); $('#exp-amt').focus();
+    } catch (err) { writeFailed(err); }
+  });
+  $('#exp-settle').addEventListener('click', async e => {
+    const b = e.target.closest('#exp-settle-btn'); if (!b || !state.db) return; b.disabled = true;
+    try { await state.db.collection('ausgaben').add({ d: todayISO, amt: +b.dataset.amt, cur: 'EUR', cat: 'ausgleich', c: autoCountry(todayISO), by: b.dataset.by, for: b.dataset.for, note: 'Ausgleich', o: Date.now() }); }
+    catch (err) { writeFailed(err); b.disabled = false; }
+  });
+  $('#exp-list').addEventListener('click', async e => {
+    const b = e.target.closest('[data-act=del]'); if (!b || !state.db) return;
+    if (!b.classList.contains('confirm')) { b.classList.add('confirm'); b.textContent = 'Löschen?'; setTimeout(() => { b.classList.remove('confirm'); b.textContent = '✕'; }, 3000); return; }
+    try { await state.db.collection('ausgaben').doc(b.closest('.exp').dataset.id).delete(); } catch (err) { writeFailed(err); }
+  });
+  $('#rates-save').addEventListener('click', async () => {
+    if (!state.db) return;
+    const o = {}; for (const cur of CURS.slice(1)) { const v = +$('#rate-' + cur).value; if (v > 0) o[cur] = v; }
+    try { await state.db.doc('config/kurse').set(o); $('#rates-save').textContent = 'Gespeichert'; setTimeout(() => { $('#rates-save').textContent = 'Kurse speichern'; }, 1800); } catch (err) { writeFailed(err); }
+  });
+})();
+
 /* ========== Claude fragen ========== */
 function planText() {
   const lines = STOPS.map(s => `${fmt(s.start)}: ${s.n} (${C[s.c].n}), ${s.k} Nächte, Anreise ${MODE_TXT[s.mode]}: ${s.via}${s.gap ? ' [NOCH UNGEPLANT]' : ''}`);
-  const f = FINDINGS.map(x => `- [${SEV[x.sev][0]}${state.checks[x.id]?.s && state.checks[x.id].s !== 'offen' ? ', Status ' + state.checks[x.id].s : ''}] ${x.t}: ${x.d} Vorschlag: ${x.fix}`);
+  const f = activeFindings().map(x => `- [${SEV[x.sev][0]}${state.checks[x.id]?.s && state.checks[x.id].s !== 'offen' ? ', Status ' + state.checks[x.id].s : ''}] ${x.t}: ${x.d} Vorschlag: ${x.fix}`);
   const b = BUDGET.map(([c, d, lo, hi]) => `${C[c].n}: ${d} Tage × ${lo} bis ${hi} €`);
-  return `Reise: 2 Personen, Backpacker (Hostels, Busse, Nachtzüge). 9. Feb bis 8. Jun 2027. Start Frankfurt, Rückflug ab Bali.\nHighlights: Safaris Sri Lanka, Full Moon Party Koh Phangan 22.3., Muay Thai, Ha Giang Loop mit Easy Rider, Schnorcheln, Bootstour nach Komodo.\n\nStationen:\n${lines.join('\n')}\n\nBekannte Funde:\n${f.join('\n')}\n\nTageskosten-Schätzung pro Person:\n${b.join('\n')}\nGesamt geschätzt 7.330 bis 10.615 € pro Person.`;
+  return `Angezeigte Thailand-Variante: ${VARIANTS.find(v => v.id === variant).n}.\nReise: 2 Personen, Backpacker (Hostels, Busse, Nachtzüge). 9. Feb bis 8. Jun 2027. Start Frankfurt, Rückflug ab Bali.\nHighlights: Safaris Sri Lanka, Full Moon Party Koh Phangan 22.3., Muay Thai, Ha Giang Loop mit Easy Rider, Schnorcheln, Bootstour nach Komodo.\n\nStationen:\n${lines.join('\n')}\n\nBekannte Funde:\n${f.join('\n')}\n\nTageskosten-Schätzung pro Person:\n${b.join('\n')}\nGesamt geschätzt 7.330 bis 10.615 € pro Person.`;
 }
 let askAbort = null;
 async function initAsk() {
@@ -1149,7 +1483,7 @@ function writeFailed(err) {
   else showBanner('Speichern hat nicht geklappt. Bitte gleich noch einmal versuchen.');
 }
 function showBanner(t) { const b = $('#db-banner'); b.textContent = t; b.hidden = false; }
-function renderAll() { renderHeader(); renderWho(); renderTodos(); renderBookings(); renderPack(); renderEntry(); renderCheck(); renderPass(); }
+function renderAll() { renderHeader(); renderVariantBar(); renderWho(); renderTodos(); renderBookings(); renderPack(); renderEntry(); renderCheck(); renderPass(); renderVariants(); renderExpenses(); }
 
 async function initDb() {
   const db = await window.claude?.use?.('db');
@@ -1167,6 +1501,10 @@ async function initDb() {
   db.collection('packliste').onSnapshot(s => { state.pack = s.docs.map(d => ({ id: d.id, ...d.data() })); if (first.p) { first.p = false; ready(); } else renderAll(); }, onErr);
   db.collection('buchungen').onSnapshot(s => { const o = {}; s.docs.forEach(d => o[d.id] = d.data()); state.bookings = o; if (first.b) { first.b = false; ready(); } else renderAll(); }, onErr);
   db.collection('checks').onSnapshot(s => { const o = {}; s.docs.forEach(d => o[d.id] = d.data()); state.checks = o; if (first.c) { first.c = false; ready(); } else renderAll(); }, onErr);
+  db.collection('ausgaben').onSnapshot(s => { state.exp = s.docs.map(d => ({ id: d.id, ...d.data() })); renderExpenses(); renderHeader(); }, onErr);
+  db.doc('config/kurse').onSnapshot(s => { state.rates = s.exists ? s.data() : {}; renderExpenses(); }, onErr);
+  db.doc('varianten/stimmen').onSnapshot(s => { const d = s.exists ? s.data() : {}; state.votes = { a: d.a || '', b: d.b || '' }; renderVariants(); }, onErr);
+  db.doc('varianten/notizen').onSnapshot(s => { state.varNotes = s.exists ? (s.data().t || '') : ''; renderVariants(); }, onErr);
   db.doc('config/reise').onSnapshot(s => { const d = s.exists ? s.data() : {}; state.names = { a: d.a || 'Matti', b: d.b || 'Partner' }; state.pass = { a: d.passA || '', b: d.passB || '' }; renderAll(); }, onErr);
 }
 
