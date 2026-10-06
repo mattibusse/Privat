@@ -320,7 +320,7 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
     </div>
     <div class="countdown">
       <div class="n mono" id="cd-n">–</div>
-      <div class="muted" id="cd-t">Tage bis zum Abflug am 8. Feb 2027</div>
+      <div class="muted" id="cd-t">Tage bis zum Abflug am 12. Feb 2027</div>
     </div>
   </header>
   <div class="stats" id="stats"></div>
@@ -488,7 +488,7 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
     <div class="sec-head"><div><h2>Einreise, Gesundheit, Geld</h2><p class="muted">Regeln für deutsche Pässe, Stand Oktober 2026. Vor Abflug beim Auswärtigen Amt erneut prüfen.</p></div></div>
     <div class="panel tbl" id="entry"></div>
     <div class="cards">
-      <div class="panel card"><h3>Reisepass</h3><ul><li>Gültig mindestens 6 Monate über die Rückreise hinaus, also bis mindestens <b>8. Dez 2027</b>.</li><li>Genug freie Seiten für ca. 10 Einreisestempel.</li><li>Ablaufdaten eintragen, der Route-Check prüft sie:</li></ul>
+      <div class="panel card"><h3>Reisepass</h3><ul><li>Gültig mindestens 6 Monate über die Rückreise hinaus, also bis mindestens <b>12. Dez 2027</b>.</li><li>Genug freie Seiten für ca. 10 Einreisestempel.</li><li>Ablaufdaten eintragen, der Route-Check prüft sie:</li></ul>
         <div style="display:grid;gap:8px;margin-top:10px">
           <label style="display:grid;grid-template-columns:110px minmax(0,1fr);gap:8px;align-items:center"><span id="pass-a-l">Matti</span><input type="date" id="pass-a"></label>
           <label style="display:grid;grid-template-columns:110px minmax(0,1fr);gap:8px;align-items:center"><span id="pass-b-l">Partner</span><input type="date" id="pass-b"></label>
@@ -537,7 +537,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt
 const store = { get(k){ try { return localStorage.getItem(k); } catch { return null; } }, set(k, v){ try { localStorage.setItem(k, v); } catch {} } };
 
 /* ---------- Datum ---------- */
-const DAY = 864e5, T0 = Date.UTC(2027, 1, 9); // erste Nacht in Sri Lanka, Abflug am 8. Feb
+const DAY = 864e5, T0 = Date.UTC(2027, 1, 13); // erste Nacht in Sri Lanka, Abflug am 12. Feb
 const MON = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
 const WD = ['So','Mo','Di','Mi','Do','Fr','Sa'];
 const dOf = i => new Date(T0 + i * DAY);
@@ -566,10 +566,10 @@ const BASE = [
   {id:'negombo',c:'LK',n:'Negombo',k:1,ll:[7.21,79.84],mode:'flug',via:'Flug Frankfurt → Doha → Colombo, Ankunft 16:30',hl:['Ankommen, abends am Strand essen','Nah am Flughafen Colombo']},
   {id:'sigiriya',c:'LK',n:'Sigiriya & Dambulla',k:3,ll:[7.957,80.76],mode:'auto',via:'Bus oder Fahrer',hl:['Löwenfelsen Sigiriya, Pidurangala zum Sonnenaufgang','Höhlentempel Dambulla','Jeep-Safari Minneriya oder Kaudulla mit großen Elefantenherden'],tip:'Safari über die Unterkunft buchen. Die frühe Tour ab Sonnenaufgang bringt die besten Sichtungen.'},
   {id:'kandy',c:'LK',n:'Kandy',k:1,ll:[7.29,80.63],mode:'bus',via:'Bus',hl:['Zahntempel','Danach Zug Richtung Ella']},
-  {id:'ella',c:'LK',n:'Ella',k:3,ll:[6.87,81.05],mode:'zug',via:'Zug Kandy → Ella',hl:['Eine der schönsten Zugstrecken der Welt','Nine Arch Bridge','Little Adam\'s Peak'],tip:'Reservierte Plätze für die Strecke sind oft früh weg. Rechtzeitig kümmern oder unreserviert 2./3. Klasse fahren.'},
+  {id:'ella',c:'LK',n:'Ella',k:3,ll:[6.87,81.05],mode:'zug',via:'Zug Kandy → Ella',hl:['Eine der schönsten Zugstrecken der Welt','Nine Arch Bridge','Little Adam\'s Peak'],tip:'Reservierte Plätze für die Strecke sind oft früh weg. Rechtzeitig kümmern oder unreserviert 2./3. Klasse fahren. 20. Feb ist Vollmond und damit Poya-Tag: Feiertag, kein Alkoholverkauf.'},
   {id:'tissa',c:'LK',n:'Tissamaharama (Yala)',k:1,ll:[6.28,81.29],mode:'bus',via:'Bus oder Tuk-Tuk',hl:['Jeep-Safari Yala am frühen Morgen','Chance auf Leoparden, Elefanten, Krokodile']},
   {id:'tangalle',c:'LK',n:'Tangalle',k:1,ll:[6.02,80.79],mode:'bus',via:'Bus',hl:['Ruhige, fast leere Strände']},
-  {id:'mirissa',c:'LK',n:'Mirissa & Weligama',k:2,ll:[5.95,80.46],mode:'bus',via:'Bus oder Tuk-Tuk',hl:['Walbeobachtung in Mirissa','Surfkurs in Weligama','Coconut Tree Hill'],tip:'20. Feb ist Vollmond und damit Poya-Tag: Feiertag, kein Alkoholverkauf.'},
+  {id:'mirissa',c:'LK',n:'Mirissa & Weligama',k:2,ll:[5.95,80.46],mode:'bus',via:'Bus oder Tuk-Tuk',hl:['Walbeobachtung in Mirissa','Surfkurs in Weligama','Coconut Tree Hill'],},
   {id:'galle',c:'LK',n:'Unawatuna & Galle',k:2,ll:[6.03,80.24],mode:'auto',via:'Tuk-Tuk',hl:['Jungle Beach, Schnorcheln','Fort Galle bei Sonnenuntergang','Danach Zug Galle → Colombo']},
   {id:'bangkok',c:'TH',n:'Bangkok',k:3,ll:[13.75,100.50],mode:'flug',path:[[6.93,79.85,'zug']],via:'Zug nach Colombo, Direktflug Colombo → Bangkok',hl:['Grand Palace, Wat Pho, Wat Arun','Chinatown, Khao San Road, Rooftop-Bar','Muay-Thai-Kampf im Rajadamnern oder Lumpinee','Ausflug Ayutthaya oder schwimmender Markt'],tip:'Kampftage der Stadien vorher prüfen und den Abend danach legen.'},
   {id:'chiangmai',c:'TH',n:'Chiang Mai',k:4,ll:[18.79,98.98],mode:'zug',via:'Nachtzug ab Bangkok',hl:['Altstadt-Tempel, Doi Suthep','Kochkurs','Elefanten nur in echten Schutzprojekten ohne Reiten','Tagesausflug Chiang Rai zum Weißen Tempel'],tip:'Rauchsaison: eine Woche vorher Luftqualität (AQI) prüfen, FFP2-Masken dabei haben.'},
@@ -578,10 +578,10 @@ const BASE = [
   {id:'lanta',c:'TH',n:'Koh Lanta',k:4,ll:[7.58,99.04],mode:'faehre',path:[[7.74,98.77,'faehre']],via:'Fähre über Koh Phi Phi',hl:['Strände','Schnorcheltour Koh Rok und Koh Haa']},
   {id:'khaosok',c:'TH',n:'Khao Sok',k:2,ll:[8.91,98.53],mode:'bus',via:'Minibus',hl:['Dschungel','Übernachtung auf dem Cheow-Lan-See']},
   {id:'kohtao',c:'TH',n:'Koh Tao',k:4,ll:[10.09,99.83],mode:'faehre',path:[[10.49,99.18,'bus']],via:'Bus nach Chumphon oder Surat Thani, Fähre',hl:['Schnorcheln Shark Bay und Koh Nang Yuan','Tauchschein möglich']},
-  {id:'samui',c:'TH',n:'Koh Samui',k:4,ll:[9.50,100.00],mode:'faehre',via:'Fähre',hl:['Ang Thong Marine Park: Schnorcheln, Kajak, Aussichtspunkt','Big Buddha, Fisherman\'s Village','Strände Chaweng oder Lamai']},
-  {id:'phangan',c:'TH',n:'Koh Phangan',k:1,ll:[9.68,100.06],mode:'faehre',via:'Fähre',hl:['Full Moon Party am Haad Rin Beach, Nacht 22./23. März'],tip:'In der Party-Woche verlangen viele Unterkünfte 3 bis 4 Nächte. Früh eine mit 1 Nacht suchen, sonst 5. Nacht auf Samui und Partyboot. Wertsachen im Zimmer, keine Drogen, kein Feuerseil.'},
-  {id:'transit',c:'XX',n:'Transit Thailand → Vietnam',k:1,ll:[9.13,99.33],mode:'faehre',gap:true,via:'Fähre und Bus nach Surat Thani, dann Flug über Bangkok',hl:['Nacht vom 23. auf den 24. März'],tip:'Diese Nacht ist im Plan noch nicht vergeben. Empfehlung im Route-Check: am 23. bis Hanoi durchfliegen.'},
-  {id:'hanoi',c:'VN',n:'Hanoi',k:3,ll:[21.03,105.85],mode:'flug',path:[[13.69,100.75,'flug']],via:'Flug Surat Thani → Bangkok → Hanoi',hl:['Altstadt','Train Street','Streetfood']},
+  {id:'phangan',c:'TH',n:'Koh Phangan',k:1,ll:[9.68,100.06],mode:'faehre',via:'Fähre Koh Tao → Koh Phangan',hl:['Full Moon Party am Haad Rin Beach, Nacht 22./23. März'],tip:'In der Party-Woche verlangen viele Unterkünfte 3 bis 4 Nächte. Früh eine mit 1 Nacht suchen. Klappt das nicht, länger auf Koh Phangan bleiben und Koh Samui entsprechend kürzen. Wertsachen im Zimmer, keine Drogen, kein Feuerseil.'},
+  {id:'samui',c:'TH',n:'Koh Samui',k:4,ll:[9.50,100.00],mode:'faehre',via:'Fähre Koh Phangan → Koh Samui, nicht vor dem Nachmittag des 23. März',hl:['Erholen nach der Party','Ang Thong Marine Park: Schnorcheln, Kajak, Aussichtspunkt','Big Buddha, Fisherman\'s Village','Strände Chaweng oder Lamai']},
+  {id:'transit',c:'XX',n:'Transit Thailand → Vietnam',k:1,ll:[13.69,100.75],mode:'flug',gap:true,via:'Flug Koh Samui → Bangkok',hl:['Nacht vom 27. auf den 28. März'],tip:'Diese Nacht ist im Plan noch nicht vergeben. Empfehlung im Route-Check: am 27. bis Hanoi durchfliegen.'},
+  {id:'hanoi',c:'VN',n:'Hanoi',k:3,ll:[21.03,105.85],mode:'flug',via:'Flug Koh Samui → Bangkok → Hanoi',hl:['Altstadt','Train Street','Streetfood']},
   {id:'hagiang',c:'VN',n:'Ha Giang Loop',k:4,ll:[23.08,105.18],mode:'bus',via:'Bus Hanoi → Ha Giang',hl:['Rollertour durch die Berge im Norden','Ohne Motorradführerschein mit Easy Rider'],tip:'Selbst fahren nur mit Klasse A und internationalem Führerschein, sonst zahlt die Versicherung nicht.'},
   {id:'ninhbinh',c:'VN',n:'Ninh Binh',k:2,ll:[20.25,105.97],mode:'bus',via:'Bus',hl:['Tam Coc, Trang An','Bootstouren durch Karstlandschaft']},
   {id:'hue',c:'VN',n:'Hue',k:2,ll:[16.46,107.59],mode:'zug',via:'Nachtzug Ninh Binh → Hue',hl:['Kaiserstadt']},
@@ -606,14 +606,14 @@ const BASE = [
   {id:'lombok',c:'ID',n:'Lombok',k:2,ll:[-8.31,116.40],mode:'faehre',via:'Boot',hl:['Wasserfälle Tiu Kelep','Start der Bootstour']},
   {id:'boot',c:'ID',n:'Bootstour nach Komodo',k:3,ll:[-8.42,117.85],mode:'boot',path:[[-8.50,116.87,'boot']],via:'Sharing-Tour 4 Tage, 3 Nächte',hl:['Kenawa Island, Walhaie in der Saleh Bay','Padar: Sonnenuntergangs-Wanderung','Komodo mit Rangern, Pink Beach, Manta Point'],tip:'Private Kabine nehmen: für zwei nur ca. 40 bis 50 € mehr pro Person. Auf Rettungsinseln und Schwimmwesten achten.'},
   {id:'flores',c:'ID',n:'Labuan Bajo (Flores)',k:3,ll:[-8.50,119.88],mode:'boot',path:[[-8.65,119.57,'boot'],[-8.55,119.45,'boot']],via:'Ankunft mit der Bootstour',hl:['Tagestour Komodo-Nationalpark','Höhle Batu Cermin']},
-  {id:'bali',c:'ID',n:'Bali (Abschluss)',k:3,ll:[-8.69,115.17],mode:'flug',via:'Flug Labuan Bajo → Bali',hl:['Puffer, falls die Bootstour sich verschiebt','Rückflug am 8. Juni']}
+  {id:'bali',c:'ID',n:'Bali (Abschluss)',k:3,ll:[-8.69,115.17],mode:'flug',via:'Flug Labuan Bajo → Bali',hl:['Puffer, falls die Bootstour sich verschiebt','Rückflug am 12. Juni']}
 ];
 const TRIPS = [
   ['Ayutthaya',14.35,100.57],['Chiang Rai',19.91,99.83],['Koh Phi Phi',7.74,98.77],['Ang Thong',9.62,99.68],
   ['Minneriya',8.03,80.88],['Mekong-Delta',10.36,106.36],['Nara',34.68,135.80],['Hiroshima',34.39,132.46],['Padar',-8.65,119.57],['Komodo',-8.55,119.45]
 ];
 /* ---------- Routen-Varianten (nur Thailand unterscheidet sich, immer 28 Nächte) ---------- */
-const TH_IDS = ['bangkok','chiangmai','pai','phuket','lanta','khaosok','kohtao','samui','phangan'];
+const TH_IDS = ['bangkok','chiangmai','pai','phuket','lanta','khaosok','kohtao','phangan','samui'];
 const B = (id, over = {}) => ({ ...BASE.find(s => s.id === id), ...over });
 const LANTA_VIA_KRABI = { mode:'faehre', path:[[18.77,98.96,'bus'],[8.10,98.98,'flug']], via:'Minibus nach Chiang Mai, Flug nach Krabi, Minibus und Fähre' };
 const PHANGAN_LONG = { k:5, via:'Fähre Koh Tao → Koh Phangan', hl:['Full Moon Party am Haad Rin Beach, Nacht 22./23. März','Tagestour Ang Thong Marine Park','Ruhige Strände im Norden zum Runterkommen'], tip:'Mit 5 Nächten in der Party-Woche fällt das Problem mit dem Mindestaufenthalt weg. Trotzdem früh buchen, die Woche ist teurer. Tipp: ruhige Unterkunft im Norden, abends nach Haad Rin.' };
@@ -636,7 +636,7 @@ let STOPS = [], ctryRange = {}, variant = 'plan';
 function buildStops(v) {
   variant = VARIANTS.some(x => x.id === v) ? v : 'plan';
   const th = VARIANTS.find(x => x.id === variant).th;
-  const i0 = BASE.findIndex(s => s.id === 'bangkok'), i1 = BASE.findIndex(s => s.id === 'phangan');
+  const i0 = BASE.findIndex(s => s.id === 'bangkok'), i1 = Math.max(...TH_IDS.map(id => BASE.findIndex(s => s.id === id)));
   STOPS = [...BASE.slice(0, i0), ...th, ...BASE.slice(i1 + 1)].map(s => ({ ...s }));
   let acc = 0;
   STOPS.forEach((s, i) => { s.i = i; s.start = acc; acc += s.k; s.end = acc; });
@@ -656,16 +656,16 @@ function buildBookings() {
   const ph = STOPS.find(s => s.id === 'phangan');
   BOOKINGS = [
   {id:'ice-hin', d:-1, m:'zug', t:'ICE Hamburg → Frankfurt Flughafen', x:'Nachmittags, Ankunft spätestens gegen 19:00. Rail&Fly prüfen, sonst Sparpreis'},
-  {id:'lh-hin', d:-1, m:'flug', t:'Frankfurt → Doha → Colombo, 22:05 → 16:30 (+1)', x:'Qatar, 395 € p. P. Prüfen, ob Aufgabegepäck im Tarif enthalten ist'},
+  {id:'lh-hin', d:-1, m:'flug', t:'Frankfurt → Doha → Colombo, 22:05 → 16:30 (+1)', x:'Qatar (QR72 + QR654), bei Kiwi 451 € p. P. mit Gepäck. Preis direkt bei Qatar vergleichen'},
   {id:'eta-lk', d:-3, m:'doc', t:'Sri Lanka ETA online', x:'Kostenlos, vor dem Abflug'},
   {id:'negombo', d:S('negombo'), m:'hotel', t:'Unterkunft Negombo'},
   {id:'cmb-bkk', d:S('bangkok'), m:'flug', t:'Colombo → Bangkok'},
   {id:'zug-cnx', d:S('chiangmai'), m:'zug', t:'Nachtzug Bangkok → Chiang Mai', x:'Schlafwagen ist oft früh ausgebucht'},
   {id:'cnx-hkt', d:S('phuket'), m:'flug', t:'Chiang Mai → Phuket'},
   {id:'cnx-kbv', d:S('phuket') == null ? S('lanta') : undefined, m:'flug', t:'Chiang Mai → Krabi', x:'Direktverbindung prüfen'},
-  {id:'samui', d:S('samui'), m:'hotel', t:'Koh Samui, 18. bis 21. März'},
+  {id:'samui', d:S('samui'), m:'hotel', t:'Koh Samui, 23. bis 26. März'},
   {id:'phangan', d:ph.start, m:'hotel', t:`Koh Phangan, ${ph.k === 1 ? '1 Nacht' : ph.k + ' Nächte'} zur Full Moon Party`, x: ph.k === 1 ? 'Mindestaufenthalt prüfen' : 'Party-Woche, früh buchen'},
-  {id:'urt-han', d:S('transit'), m:'flug', t:'Surat Thani oder Samui → Bangkok → Hanoi', x:'Nicht vor dem Nachmittag des 23. März'},
+  {id:'urt-han', d:S('transit'), m:'flug', t:'Koh Samui → Bangkok → Hanoi', x:'Am 27. März, Ausreise Thailand an Tag 29'},
   {id:'hagiang', d:S('hagiang'), m:'tour', t:'Ha Giang Loop mit Easy Rider', x:'Vor Ort in Hanoi oder Ha Giang'},
   {id:'zug-hue', d:S('hue'), m:'zug', t:'Nachtzug Ninh Binh → Hue'},
   {id:'dad-sgn', d:S('saigon'), m:'flug', t:'Da Nang → Saigon'},
@@ -678,10 +678,10 @@ function buildBookings() {
   {id:'mnl-pps', d:S('portbarton'), m:'flug', t:'Manila → Puerto Princesa'},
   {id:'faehre-coron', d:S('coron'), m:'faehre', t:'Fähre El Nido → Coron'},
   {id:'usu-iao', d:S('siargao'), m:'flug', t:'Coron → Siargao (Umstieg Cebu oder Manila)'},
-  {id:'iao-kul', d:S('kl'), m:'flug', t:'Siargao → Kuala Lumpur (Umstieg Cebu oder Manila)'},
+  {id:'iao-kul', d:S('kl'), m:'flug', t:'Siargao → Kuala Lumpur (Umstieg Cebu oder Manila)', x:'Fällt auf Eid al-Adha, früh buchen'},
   {id:'kul-sin', d:S('sg'), m:'bus', t:'Bus Kuala Lumpur → Singapur'},
-  {id:'sin-dps', d:S('ubud'), m:'flug', t:'Singapur → Bali', x:'Um Eid al-Adha herum, früh buchen'},
-  {id:'boot', d:S('boot'), m:'boot', t:'Bootstour Lombok → Labuan Bajo, private Kabine', x:'1 bis 2 Monate vorher, Ende Mai ist Hochsaison'},
+  {id:'sin-dps', d:S('ubud'), m:'flug', t:'Singapur → Bali'},
+  {id:'boot', d:S('boot'), m:'boot', t:'Bootstour Lombok → Labuan Bajo, private Kabine', x:'1 bis 2 Monate vorher, Anfang Juni ist Hochsaison'},
   {id:'lbj-dps', d:S('bali'), m:'flug', t:'Labuan Bajo → Bali'},
   {id:'dps-ham', d:NIGHTS, m:'flug', t:'Rückflug Bali → Hamburg oder Frankfurt', x:'Hamburg mit einem Umstieg bevorzugt'}
   ].filter(b => b.d != null);
@@ -694,9 +694,9 @@ const FLIGHT_SEGMENTS = 14; // regionale Segmente inkl. Umstiege, siehe Route-Ch
 const activeFindings = () => FINDINGS.filter(f => !f.onlyIn || f.onlyIn.includes(variant));
 const SEV = { kritisch:['Kritisch','var(--bad)'], pruefen:['Prüfen','var(--warn)'], hinweis:['Hinweis','var(--info)'], option:['Option','var(--opt)'] };
 const FINDINGS = [
-  {id:'transit23', sev:'kritisch', stop:'transit', t:'Die Nacht vom 23. auf den 24. März fehlt im Plan',
-   d:'Thailand endet mit der Partynacht am 22. März, Vietnam beginnt laut Plan erst am 24. Für die Nacht dazwischen gibt es weder Unterkunft noch Flug. Bleibt ihr diese Nacht in Bangkok, verlasst ihr Thailand am 24. März, also am 30. und letzten erlaubten Tag ohne Puffer.',
-   fix:'Am 23. ab dem späten Nachmittag Surat Thani oder Samui → Bangkok → Hanoi durchfliegen und Hanoi um eine Nacht verlängern. Thailand-Ausreise bleibt am Tag 29.', todo:{t:'Transit 23. März festlegen: Flug Surat Thani/Samui → Bangkok → Hanoi am Nachmittag, Hanoi ab 23. buchen', g:'2026-12', due:'2026-12-15'}},
+  {id:'transit23', sev:'kritisch', stop:'transit', t:'Die Nacht vom 27. auf den 28. März fehlt im Plan',
+   d:'Thailand endet nach Koh Samui am 27. März, Vietnam beginnt laut Plan erst am 28. Für die Nacht dazwischen gibt es weder Unterkunft noch Flug. Bleibt ihr diese Nacht in Bangkok, verlasst ihr Thailand am 28. März, also am 30. und letzten erlaubten Tag ohne Puffer.',
+   fix:'Am 27. von Koh Samui über Bangkok bis Hanoi durchfliegen und Hanoi um eine Nacht verlängern. Thailand-Ausreise bleibt am Tag 29.', todo:{t:'Transit 27. März festlegen: Flug Koh Samui → Bangkok → Hanoi, Hanoi ab 27. buchen', g:'2026-12', due:'2026-12-15'}},
   {id:'fluege', sev:'pruefen', t:'Es sind rund 14 regionale Flugsegmente, nicht 6 bis 8',
    d:'Mit Umstiegen kommen zusammen: Colombo → Bangkok, Chiang Mai → Phuket, Surat Thani → Bangkok → Hanoi, Da Nang → Saigon, Saigon → Tokio, Japan → Manila, Manila → Puerto Princesa, Coron → Cebu → Siargao, Siargao → Cebu → Kuala Lumpur, Singapur → Bali, Labuan Bajo → Bali. Das Budget rechnet mit ca. 9 Flügen.',
    fix:'Im Buchungen-Tab alle Strecken mit ersten Preisen versehen und den Flugposten im Budget neu schätzen.', todo:{t:'Flugbudget neu schätzen: alle 14 Regionalsegmente mit Preisen hinterlegen', g:'2026-11', due:'2026-11-30'}},
@@ -710,19 +710,19 @@ const FINDINGS = [
    d:'Zwischen Coron und Siargao gibt es in der Regel keinen Direktflug, ihr steigt in Cebu oder Manila um. Von Siargao nach Kuala Lumpur ebenso. Siargao hat dadurch effektiv eher 4 volle Tage.',
    fix:'Umstiegszeiten großzügig planen und beide Flüge zusammen buchen. Alternative unter Optionen: Siargao streichen.', todo:{t:'Flugverbindungen Coron → Siargao und Siargao → KL recherchieren', g:'2026-12', due:'2026-12-20'}},
   {id:'rauch', sev:'pruefen', stop:'chiangmai', t:'Rauchsaison in Nordthailand',
-   d:'Ihr seid vom 26. Februar bis 4. März in Chiang Mai und Pai. Die Brandrodung beginnt typischerweise im Februar, der Höhepunkt liegt im März und April.',
+   d:'Ihr seid vom 2. bis 8. März in Chiang Mai und Pai. Die Brandrodung beginnt typischerweise im Februar, der Höhepunkt liegt im März und April. Durch die Verschiebung ist das Risiko etwas höher als vorher.',
    fix:'Eine Woche vorher die Luftqualität prüfen. Bei schlechten Werten Pai kürzen und die Tage auf Koh Lanta oder Koh Tao legen. FFP2-Masken einpacken.'},
   {id:'boot', sev:'pruefen', stop:'boot', t:'Abfahrtstag der Bootstour bestimmt den Indonesien-Plan',
-   d:'Die Sharing-Touren starten nur an bestimmten Wochentagen. Laut Plan müsstet ihr am 30. Mai ab Lombok los.',
+   d:'Die Sharing-Touren starten nur an bestimmten Wochentagen. Laut Plan müsstet ihr am 3. Juni ab Lombok los.',
    fix:'Zuerst Anbieter und Abfahrtstag festlegen, dann Ubud, Nusa Penida, Uluwatu, Gili Air und Lombok darum herum planen. Der Bali-Puffer am Ende fängt Verschiebungen auf.', todo:{t:'Abfahrtstage der Bootstour-Anbieter prüfen, Indonesien-Daten daran ausrichten', g:'2027-01', due:'2027-01-10'}},
   {id:'weiterreise', sev:'hinweis', t:'Weiterreise-Nachweis bei der Einreise',
    d:'Philippinen, Indonesien, Thailand und Vietnam können am Check-in oder bei der Einreise ein Ausreiseticket verlangen.',
    fix:'Den Folgeflug vor jeder Einreise gebucht haben und die Buchung offline speichern.'},
-  {id:'eid', sev:'hinweis', stop:'sg', t:'Eid al-Adha um den 16. Mai',
-   d:'Das Opferfest fällt 2027 voraussichtlich auf den 16. oder 17. Mai: Feiertag in Malaysia, Singapur und Indonesien, genau bei eurem Wechsel nach Bali.',
-   fix:'Flug Singapur → Bali früh buchen.'},
-  {id:'poya', sev:'hinweis', stop:'mirissa', t:'Poya-Tag am 20. Februar in Sri Lanka',
-   d:'Jeder Vollmond ist in Sri Lanka ein Feiertag. Am Poya-Tag wird kein Alkohol verkauft, Tempel sind voll. Ihr seid dann in Mirissa.',
+  {id:'eid', sev:'hinweis', stop:'kl', t:'Eid al-Adha um den 16. Mai',
+   d:'Das Opferfest fällt 2027 voraussichtlich auf den 16. oder 17. Mai: Feiertag in Malaysia, Singapur und Indonesien, genau bei eurer Ankunft in Kuala Lumpur.',
+   fix:'Flug nach Kuala Lumpur und Unterkunft dort früh buchen.'},
+  {id:'poya', sev:'hinweis', stop:'ella', t:'Poya-Tag am 20. Februar in Sri Lanka',
+   d:'Jeder Vollmond ist in Sri Lanka ein Feiertag. Am Poya-Tag wird kein Alkohol verkauft, Tempel sind voll. Ihr seid dann in Ella.',
    fix:'Einplanen statt ärgern: Tempelbesuch oder Strandtag.'},
   {id:'jrpass', sev:'hinweis', stop:'kyoto', t:'Japan Rail Pass rechnet sich wahrscheinlich nicht',
    d:'Eure Strecke ist Tokio → Hakone → Kyoto → Osaka plus Tagesausflug Hiroshima. Seit der Preiserhöhung 2023 sind Einzeltickets auf so einer Route meist günstiger als der 7-Tage-Pass.',
@@ -739,7 +739,7 @@ const FINDINGS = [
 const MONTHS = ['Feb','Mär','Apr','Mai','Jun'];
 const SEASON = [
   ['Sri Lanka Süd/West','LK',['g','g','o','b','b'],[0]],
-  ['Nordthailand','TH',['g','o','b','b','b'],[0,1]],
+  ['Nordthailand','TH',['g','o','b','b','b'],[1]],
   ['Andamanensee (Phuket, Lanta)','TH',['g','g','o','b','b'],[1]],
   ['Golf (Tao, Samui, Phangan)','TH',['g','g','g','g','o'],[1]],
   ['Nordvietnam','VN',['o','o','g','o','b'],[1,2]],
@@ -792,15 +792,15 @@ state.sel = stopAt(state.day).i;
 
 /* ========== Kopf ========== */
 function renderHeader() {
-  const dLeft = Math.round((Date.UTC(2027, 1, 8) - Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / DAY);
-  if (dLeft > 0) { $('#cd-n').textContent = dLeft; $('#cd-t').textContent = (dLeft === 1 ? 'Tag' : 'Tage') + ' bis zum Abflug am 8. Feb 2027'; }
+  const dLeft = Math.round((Date.UTC(2027, 1, 12) - Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / DAY);
+  if (dLeft > 0) { $('#cd-n').textContent = dLeft; $('#cd-t').textContent = (dLeft === 1 ? 'Tag' : 'Tage') + ' bis zum Abflug am 12. Feb 2027'; }
   else if (TODAY < NIGHTS) { $('#cd-n').textContent = 'Tag ' + (TODAY + 2); $('#cd-t').textContent = 'von ' + (NIGHTS + 2) + ', heute: ' + stopAt(TODAY).n; }
   else { $('#cd-n').textContent = '✓'; $('#cd-t').textContent = 'Reise abgeschlossen'; }
   const open = state.todos.filter(t => !t.done).length;
   const booked = BOOKINGS.filter(b => ['gebucht','vorort'].includes(state.bookings[b.id]?.s)).length;
   const moves = STOPS.length - 1;
   $('#stats').innerHTML = [
-    [String(NIGHTS + 2), 'Tage, 8. Feb bis 8. Jun'],
+    [String(NIGHTS + 2), 'Tage, 12. Feb bis 12. Jun'],
     ['8', 'Länder und Stadtstaaten'],
     [STOPS.length, 'Stationen, ' + moves + ' Ortswechsel'],
     ['~' + FLIGHT_SEGMENTS, 'Regionalflüge plus Langstrecke'],
@@ -1006,7 +1006,7 @@ $('#day').addEventListener('input', e => { stopPlay(); state.day = +e.target.val
 
 const EVENTS = [
   { d: -1, t: 'ICE und Abflug FRA → CMB' }, { d: 0, t: 'Ankunft Colombo 16:30' }, { d: idxISO('2027-02-20'), t: 'Poya-Tag Sri Lanka' },
-  { d: idxISO('2027-03-22'), t: 'Full Moon Party' }, { d: idxISO('2027-03-23'), t: 'Ausreise Thailand (Tag 29/30)' },
+  { d: idxISO('2027-03-22'), t: 'Full Moon Party' }, { d: idxISO('2027-03-27'), t: 'Ausreise Thailand (Tag 29/30)' },
   { d: idxISO('2027-04-29'), t: 'Golden Week Japan (ihr seid weg)' }, { d: idxISO('2027-05-16'), t: 'Eid al-Adha (vorauss.)' },
   { d: S('boot'), t: 'Start Bootstour' }, { d: NIGHTS, t: 'Rückflug DPS → HAM' }
 ];
@@ -1015,7 +1015,7 @@ function renderBand() {
   const parts = []; let last = null;
   STOPS.forEach(s => { if (last && last.c === s.c) last.k += s.k; else { last = { c: s.c, k: s.k }; parts.push(last); } });
   $('#band-ctry').innerHTML = parts.map(p => `<span style="flex:${p.k} 1 0;color:var(--c-${p.c})">${p.k >= 6 ? esc(C[p.c].n) : p.c === 'XX' ? '' : p.c}</span>`).join('');
-  $('#band-months').innerHTML = [['2027-02-09','9. Feb'],['2027-03-01','Mär'],['2027-04-01','Apr'],['2027-05-01','Mai'],['2027-06-01','Jun']].map(([iso, t]) => `<span style="left:${idxISO(iso) / NIGHTS * 100}%">${t}</span>`).join('');
+  $('#band-months').innerHTML = [['2027-02-13','13. Feb'],['2027-03-01','Mär'],['2027-04-01','Apr'],['2027-05-01','Mai'],['2027-06-01','Jun']].map(([iso, t]) => `<span style="left:${idxISO(iso) / NIGHTS * 100}%">${t}</span>`).join('');
   $('#events').innerHTML = EVENTS.map(e => `<span class="chip"><span class="mono">${fmt(e.d)}</span> ${esc(e.t)}</span>`).join('');
 }
 renderBand();
@@ -1048,7 +1048,7 @@ function renderCheck() {
   items.push([jp.end < gw ? 'ok' : 'no', `Golden Week ab 29. April: Japan endet am ${fmt(jp.end)}`]);
   const buf = STOPS.find(s => s.id === 'bali');
   items.push(['ok', `Puffer vor dem Rückflug: ${buf.k} Nächte auf Bali`]);
-  const minPass = '2027-12-08';
+  const minPass = '2027-12-12';
   for (const w of ['a', 'b']) {
     const v = state.pass[w];
     items.push(!v ? ['mid', `Reisepass ${state.names[w]}: Ablaufdatum fehlt (Tab Einreise)`] : v >= minPass ? ['ok', `Reisepass ${state.names[w]} gültig bis ${fmtISO(v)}`] : ['no', `Reisepass ${state.names[w]} läuft am ${fmtISO(v)} ab: neu beantragen`]);
@@ -1186,7 +1186,7 @@ $('#bookings').addEventListener('change', async e => {
 function renderEntry() {
   $('#entry').innerHTML = `<table class="t"><thead><tr><th>Land</th><th>Regel</th><th>Kosten</th><th>Formular</th><th class="r">Einreise</th><th class="r">Ausfüllen ab</th></tr></thead><tbody>${ENTRY.map(([c, rule, cost, form, pre]) => {
     const a = ctryRange[c].start;
-    const from = pre === 'pre' ? 'vor 8. Feb' : typeof pre === 'number' ? fmt(a - pre) : '–';
+    const from = pre === 'pre' ? 'vor 12. Feb' : typeof pre === 'number' ? fmt(a - pre) : '–';
     return `<tr><td><span class="dot" style="background:var(--c-${c});margin-right:6px"></span>${esc(C[c].n)}</td><td>${esc(rule)}</td><td>${esc(cost)}</td><td>${esc(form || '–')}</td><td class="r">${fmt(a)}</td><td class="r">${from}</td></tr>`;
   }).join('')}</tbody></table>`;
   $('#pass-a-l').textContent = state.names.a; $('#pass-b-l').textContent = state.names.b;
@@ -1289,7 +1289,7 @@ function renderVariants() {
     ['Stationen gesamt', v => variantStats(v).total],
     ['Fällt weg', v => esc(variantStats(v).dropped.join(', ') || '–')],
     ['Länger', v => esc(variantStats(v).longer.join(', ') || '–')],
-    ['Koh Phangan', v => { const p = v.th.find(s => s.id === 'phangan'); return p.k === 1 ? '1 Nacht, Mindestaufenthalt prüfen' : p.k + ' Nächte, ganze Party-Woche'; }]
+    ['Koh Phangan', v => { const p = v.th.find(s => s.id === 'phangan'); return p.k === 1 ? '1 Nacht, Mindestaufenthalt prüfen' : p.k + ' Nächte ab der Partynacht'; }]
   ];
   $('#var-table').innerHTML = `<table class="t"><thead><tr><th></th>${VARIANTS.map(v => `<th>${esc(v.n)}</th>`).join('')}</tr></thead><tbody>${rows.map(([l, f]) => `<tr><td class="muted">${l}</td>${VARIANTS.map(v => `<td>${f(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
   const ta = $('#var-notes'); if (document.activeElement !== ta) ta.value = state.varNotes; ta.disabled = !(state.canWrite && state.db);
@@ -1441,7 +1441,7 @@ function planText() {
   const lines = STOPS.map(s => `${fmt(s.start)}: ${s.n} (${C[s.c].n}), ${s.k} Nächte, Anreise ${MODE_TXT[s.mode]}: ${s.via}${s.gap ? ' [NOCH UNGEPLANT]' : ''}`);
   const f = activeFindings().map(x => `- [${SEV[x.sev][0]}${state.checks[x.id]?.s && state.checks[x.id].s !== 'offen' ? ', Status ' + state.checks[x.id].s : ''}] ${x.t}: ${x.d} Vorschlag: ${x.fix}`);
   const b = BUDGET.map(([c, d, lo, hi]) => `${C[c].n}: ${d} Tage × ${lo} bis ${hi} €`);
-  return `Angezeigte Thailand-Variante: ${VARIANTS.find(v => v.id === variant).n}.\nReise: 2 Personen, Backpacker (Hostels, Busse, Nachtzüge). Abflug 8. Feb 22:05 ab Frankfurt (Qatar über Doha, Ankunft Colombo 9. Feb 16:30), Rückflug 8. Jun 2027, Rückflug ab Bali.\nHighlights: Safaris Sri Lanka, Full Moon Party Koh Phangan 22.3., Muay Thai, Ha Giang Loop mit Easy Rider, Schnorcheln, Bootstour nach Komodo.\n\nStationen:\n${lines.join('\n')}\n\nBekannte Funde:\n${f.join('\n')}\n\nTageskosten-Schätzung pro Person:\n${b.join('\n')}\nGesamt geschätzt 7.330 bis 10.615 € pro Person.`;
+  return `Angezeigte Thailand-Variante: ${VARIANTS.find(v => v.id === variant).n}.\nReise: 2 Personen, Backpacker (Hostels, Busse, Nachtzüge). Abflug 12. Feb 22:05 ab Frankfurt (Qatar über Doha, Ankunft Colombo 13. Feb 16:30), Rückflug 12. Jun 2027, Rückflug ab Bali.\nHighlights: Safaris Sri Lanka, Full Moon Party Koh Phangan 22.3., Muay Thai, Ha Giang Loop mit Easy Rider, Schnorcheln, Bootstour nach Komodo.\n\nStationen:\n${lines.join('\n')}\n\nBekannte Funde:\n${f.join('\n')}\n\nTageskosten-Schätzung pro Person:\n${b.join('\n')}\nGesamt geschätzt 7.330 bis 10.615 € pro Person.`;
 }
 let askAbort = null;
 async function initAsk() {
