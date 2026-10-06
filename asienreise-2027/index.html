@@ -573,16 +573,15 @@ const BASE = [
   {id:'galle',c:'LK',n:'Unawatuna & Galle',k:1,ll:[6.03,80.24],mode:'auto',via:'Tuk-Tuk',hl:['Jungle Beach, Schnorcheln','Fort Galle am nächsten Tag, bevor es zum Flughafen geht']},
   {id:'cmbflug',c:'LK',n:'Nachtflug nach Bangkok',k:1,ll:[7.18,79.88],mode:'auto',via:'Fahrer oder Zug Galle → Flughafen Colombo, etwa 2 bis 3 Stunden',hl:['Vormittags noch Unawatuna, nachmittags Fort Galle','Abends zum Flughafen, spätestens gegen 22:00 dort','TG308 ab 01:00, Ankunft Bangkok 06:10'],tip:'Diese Nacht verbringt ihr am Flughafen und im Flugzeug. Ein Fahrer direkt von Galle zum Flughafen ist bequemer als Zug plus Umstieg in Colombo.'},
   {id:'bangkok',c:'TH',n:'Bangkok',k:3,ll:[13.75,100.50],mode:'flug',via:'THAI TG308 Colombo → Bangkok, nonstop, Ankunft 06:10',hl:['Grand Palace, Wat Pho, Wat Arun','Chinatown, Khao San Road, Rooftop-Bar','Muay-Thai-Kampf im Rajadamnern oder Lumpinee','Ausflug Ayutthaya oder schwimmender Markt'],tip:'Ankunft schon um 06:10: Early Check-in anfragen oder Gepäck im Hotel lassen und direkt los. Kampftage der Stadien vorher prüfen.'},
-  {id:'chiangmai',c:'TH',n:'Chiang Mai',k:4,ll:[18.79,98.98],mode:'zug',via:'Nachtzug ab Bangkok',hl:['Altstadt-Tempel, Doi Suthep','Kochkurs','Elefanten nur in echten Schutzprojekten ohne Reiten','Tagesausflug Chiang Rai zum Weißen Tempel'],tip:'Rauchsaison: eine Woche vorher Luftqualität (AQI) prüfen, FFP2-Masken dabei haben.'},
-  {id:'pai',c:'TH',n:'Pai',k:3,ll:[19.36,98.44],mode:'bus',via:'Minibus, sehr kurvig',hl:['Pai Canyon','Wasserfälle','Rollertouren']},
-  {id:'phuket',c:'TH',n:'Phuket',k:3,ll:[7.82,98.30],mode:'flug',path:[[18.77,98.96,'bus']],via:'Minibus nach Chiang Mai, Flug Chiang Mai → Phuket',hl:['Altstadt, Big Buddha, Promthep Cape','Kata oder Karon statt Patong','Tagestour Koh Phi Phi (Maya Bay) oder Phang Nga Bucht','Muay-Thai-Schnupperstunden an der Soi Ta-iad']},
-  {id:'lanta',c:'TH',n:'Koh Lanta',k:4,ll:[7.58,99.04],mode:'faehre',path:[[7.74,98.77,'faehre']],via:'Fähre über Koh Phi Phi',hl:['Strände','Schnorcheltour Koh Rok und Koh Haa']},
-  {id:'khaosok',c:'TH',n:'Khao Sok',k:2,ll:[8.91,98.53],mode:'bus',via:'Minibus',hl:['Dschungel','Übernachtung auf dem Cheow-Lan-See']},
-  {id:'kohtao',c:'TH',n:'Koh Tao',k:4,ll:[10.09,99.83],mode:'faehre',path:[[10.49,99.18,'bus']],via:'Bus nach Chumphon oder Surat Thani, Fähre',hl:['Schnorcheln Shark Bay und Koh Nang Yuan','Tauchschein möglich']},
-  {id:'phangan',c:'TH',n:'Koh Phangan',k:1,ll:[9.68,100.06],mode:'faehre',via:'Fähre Koh Tao → Koh Phangan',hl:['Full Moon Party am Haad Rin Beach, Nacht 22./23. März'],tip:'In der Party-Woche verlangen viele Unterkünfte 3 bis 4 Nächte. Früh eine mit 1 Nacht suchen. Klappt das nicht, länger auf Koh Phangan bleiben und Koh Samui entsprechend kürzen. Wertsachen im Zimmer, keine Drogen, kein Feuerseil.'},
-  {id:'samui',c:'TH',n:'Koh Samui',k:4,ll:[9.50,100.00],mode:'faehre',via:'Fähre Koh Phangan → Koh Samui, nicht vor dem Nachmittag des 23. März',hl:['Erholen nach der Party','Ang Thong Marine Park: Schnorcheln, Kajak, Aussichtspunkt','Big Buddha, Fisherman\'s Village','Strände Chaweng oder Lamai']},
-  {id:'transit',c:'XX',n:'Transit Thailand → Vietnam',k:1,ll:[13.69,100.75],mode:'flug',gap:true,via:'Flug Koh Samui → Bangkok',hl:['Nacht vom 27. auf den 28. März'],tip:'Diese Nacht ist im Plan noch nicht vergeben. Empfehlung im Route-Check: am 27. bis Hanoi durchfliegen.'},
-  {id:'hanoi',c:'VN',n:'Hanoi',k:3,ll:[21.03,105.85],mode:'flug',via:'Flug Koh Samui → Bangkok → Hanoi',hl:['Altstadt','Train Street','Streetfood']},
+  {id:'chiangmai',c:'TH',n:'Chiang Mai',k:4,ll:[18.79,98.98],mode:'zug',via:'Nachtzug ab Bangkok',hl:['Altstadt-Tempel, Doi Suthep','Kochkurs','Elefanten nur in echten Schutzprojekten ohne Reiten','Tagesausflug Chiang Rai zum Weißen Tempel','Muay-Thai-Training in einem Gym (statt Phuket)'],tip:'Rauchsaison: eine Woche vorher Luftqualität (AQI) prüfen, FFP2-Masken dabei haben.'},
+  {id:'pai',c:'TH',n:'Pai',k:2,ll:[19.36,98.44],mode:'bus',via:'Minibus, sehr kurvig',hl:['Pai Canyon','Wasserfälle','Rollertouren']},
+  {id:'krabi',c:'TH',n:'Krabi (Ao Nang)',k:3,ll:[8.03,98.82],mode:'flug',path:[[18.77,98.96,'bus']],via:'Minibus nach Chiang Mai, Flug Chiang Mai → Krabi',hl:['Railay Beach mit dem Longtail-Boot','4-Islands-Tour','Tiger Cave Tempel'],tip:'Ob es einen Direktflug Chiang Mai → Krabi gibt, vor dem Buchen prüfen. Sonst mit Umstieg in Bangkok.'},
+  {id:'phiphi',c:'TH',n:'Koh Phi Phi',k:3,ll:[7.74,98.77],mode:'faehre',via:'Fähre ab Krabi',hl:['Maya Bay und Pileh Lagoon','Schnorcheln an Bamboo Island','Viewpoint zum Sonnenuntergang']},
+  {id:'khaosok',c:'TH',n:'Khao Sok',k:3,ll:[8.91,98.53],mode:'bus',path:[[8.03,98.82,'faehre']],via:'Fähre zurück nach Krabi, Minibus nach Khao Sok',hl:['Dschungel und Kanutour','Übernachtung auf dem Cheow-Lan-See']},
+  {id:'kohtao',c:'TH',n:'Koh Tao',k:5,ll:[10.09,99.83],mode:'faehre',path:[[9.13,99.33,'bus']],via:'Minibus nach Surat Thani, Fähre nach Koh Tao',hl:['Schnorcheln Shark Bay und Koh Nang Yuan','Tauchschein möglich (dauert meist 3 bis 4 Tage)']},
+  {id:'phangan',c:'TH',n:'Koh Phangan',k:2,ll:[9.68,100.06],mode:'faehre',via:'Fähre Koh Tao → Koh Phangan',hl:['Full Moon Party am Haad Rin Beach, Nacht 22./23. März','Am 23. ausschlafen'],tip:'In der Party-Woche verlangen viele Unterkünfte 3 bis 4 Nächte. Früh eine mit 2 Nächten suchen. Klappt das nicht, Koh Samui um eine Nacht kürzen und auf Koh Phangan verlängern. Wertsachen im Zimmer, keine Drogen, kein Feuerseil.'},
+  {id:'samui',c:'TH',n:'Koh Samui',k:4,ll:[9.50,100.00],mode:'faehre',via:'Fähre Koh Phangan → Koh Samui',hl:['Erholen nach der Party','Ang Thong Marine Park: Schnorcheln, Kajak, Aussichtspunkt','Big Buddha, Fisherman\'s Village','Strände Chaweng oder Lamai'],tip:'Abreise am 28. März ist der letzte erlaubte Tag in Thailand: frühen Flug nach Hanoi nehmen.'},
+  {id:'hanoi',c:'VN',n:'Hanoi',k:3,ll:[21.03,105.85],mode:'flug',path:[[13.69,100.75,'flug']],via:'Flug Koh Samui → Bangkok → Hanoi am 28. März',hl:['Altstadt','Train Street','Streetfood']},
   {id:'hagiang',c:'VN',n:'Ha Giang Loop',k:4,ll:[23.08,105.18],mode:'bus',via:'Bus Hanoi → Ha Giang',hl:['Rollertour durch die Berge im Norden','Ohne Motorradführerschein mit Easy Rider'],tip:'Selbst fahren nur mit Klasse A und internationalem Führerschein, sonst zahlt die Versicherung nicht.'},
   {id:'ninhbinh',c:'VN',n:'Ninh Binh',k:2,ll:[20.25,105.97],mode:'bus',via:'Bus',hl:['Tam Coc, Trang An','Bootstouren durch Karstlandschaft']},
   {id:'hue',c:'VN',n:'Hue',k:2,ll:[16.46,107.59],mode:'zug',via:'Nachtzug Ninh Binh → Hue',hl:['Kaiserstadt']},
@@ -610,28 +609,14 @@ const BASE = [
   {id:'bali',c:'ID',n:'Bali (Abschluss)',k:3,ll:[-8.69,115.17],mode:'flug',via:'Flug Labuan Bajo → Bali',hl:['Puffer, falls die Bootstour sich verschiebt','Rückflug am 12. Juni']}
 ];
 const TRIPS = [
-  ['Ayutthaya',14.35,100.57],['Chiang Rai',19.91,99.83],['Koh Phi Phi',7.74,98.77],['Ang Thong',9.62,99.68],
+  ['Ayutthaya',14.35,100.57],['Chiang Rai',19.91,99.83],['Ang Thong',9.62,99.68],
   ['Minneriya',8.03,80.88],['Mekong-Delta',10.36,106.36],['Nara',34.68,135.80],['Hiroshima',34.39,132.46],['Padar',-8.65,119.57],['Komodo',-8.55,119.45]
 ];
 /* ---------- Routen-Varianten (nur Thailand unterscheidet sich, immer 28 Nächte) ---------- */
-const TH_IDS = ['bangkok','chiangmai','pai','phuket','lanta','khaosok','kohtao','phangan','samui'];
+const TH_IDS = ['bangkok','chiangmai','pai','krabi','phiphi','khaosok','kohtao','phangan','samui'];
 const B = (id, over = {}) => ({ ...BASE.find(s => s.id === id), ...over });
-const LANTA_VIA_KRABI = { mode:'faehre', path:[[18.77,98.96,'bus'],[8.10,98.98,'flug']], via:'Minibus nach Chiang Mai, Flug nach Krabi, Minibus und Fähre' };
-const PHANGAN_LONG = { k:5, via:'Fähre Koh Tao → Koh Phangan', hl:['Full Moon Party am Haad Rin Beach, Nacht 22./23. März','Tagestour Ang Thong Marine Park','Ruhige Strände im Norden zum Runterkommen'], tip:'Mit 5 Nächten in der Party-Woche fällt das Problem mit dem Mindestaufenthalt weg. Trotzdem früh buchen, die Woche ist teurer. Tipp: ruhige Unterkunft im Norden, abends nach Haad Rin.' };
-const CM_TRAIN = { hl:[...BASE.find(s => s.id === 'chiangmai').hl, 'Muay-Thai-Training in einem Gym (ersetzt Phuket)'] };
 const VARIANTS = [
-  { id:'plan', n:'Aktueller Plan', sub:'9 Stationen in Thailand, so wie im Reiseplan',
-    th: TH_IDS.map(id => B(id)),
-    pro:['Maximale Vielfalt: Phuket, Khao Sok und Samui sind dabei','Muay-Thai-Training an der Soi Ta-iad'],
-    con:['Alle 3 Tage ein Ortswechsel, oft mit halbem Reisetag','Koh Phangan nur 1 Nacht: Mindestaufenthalt in der Party-Woche ist ein Problem'] },
-  { id:'ruhig', n:'Thailand ruhiger', sub:'6 Stationen, längere Aufenthalte',
-    th: [B('bangkok'), B('chiangmai', CM_TRAIN), B('pai', { k:4 }), B('lanta', { k:7, ...LANTA_VIA_KRABI, hl:['Strände und Zeit zum Entspannen','Schnorcheltour Koh Rok und Koh Haa','Tagestour Koh Phi Phi und Maya Bay'] }), B('kohtao', { k:5, path:[[10.49,99.18,'bus']], via:'Minibus und Fähre über Chumphon oder Surat Thani, ganzer Reisetag' }), B('phangan', PHANGAN_LONG)],
-    pro:['Nur 5 Ortswechsel statt 8','Koh Phangan mit 5 Nächten: kein Ärger mit Mindestaufenthalt','Koh Lanta 7 Nächte: Zeit für Ausflüge und echte Ruhetage'],
-    con:['Phuket, Khao Sok und Samui fallen weg','Koh Lanta → Koh Tao ist ein langer Reisetag','Party-Woche auf Koh Phangan ist pro Nacht teurer'] },
-  { id:'ruhigks', n:'Ruhiger mit Khao Sok', sub:'7 Stationen, Dschungel bleibt drin',
-    th: [B('bangkok'), B('chiangmai', CM_TRAIN), B('pai', { k:4 }), B('lanta', { k:5, ...LANTA_VIA_KRABI }), B('khaosok'), B('kohtao', { k:5 }), B('phangan', PHANGAN_LONG)],
-    pro:['Dschungel und Nacht auf dem Cheow-Lan-See bleiben','Khao Sok teilt die lange Strecke Koh Lanta → Koh Tao in zwei Etappen','Koh Phangan mit 5 Nächten'],
-    con:['6 Ortswechsel','Koh Lanta nur 5 Nächte','Phuket und Samui fallen weg'] }
+  { id:'plan', n:'Euer Plan', sub:'9 Stationen, 29 Nächte', th: TH_IDS.map(id => B(id)), pro:[], con:[] }
 ];
 let STOPS = [], ctryRange = {}, variant = 'plan';
 function buildStops(v) {
@@ -662,11 +647,11 @@ function buildBookings() {
   {id:'negombo', d:S('negombo'), m:'hotel', t:'Unterkunft Negombo'},
   {id:'cmb-bkk', d:S('bangkok'), m:'flug', t:'THAI TG308 Colombo → Bangkok, 01:00 → 06:10', x:'Abflug in der Nacht vom 26. auf den 27. Feb'},
   {id:'zug-cnx', d:S('chiangmai'), m:'zug', t:'Nachtzug Bangkok → Chiang Mai', x:'Schlafwagen ist oft früh ausgebucht'},
-  {id:'cnx-hkt', d:S('phuket'), m:'flug', t:'Chiang Mai → Phuket'},
-  {id:'cnx-kbv', d:S('phuket') == null ? S('lanta') : undefined, m:'flug', t:'Chiang Mai → Krabi', x:'Direktverbindung prüfen'},
-  {id:'samui', d:S('samui'), m:'hotel', t:'Koh Samui, 23. bis 26. März'},
+  {id:'cnx-kbv', d:S('krabi'), m:'flug', t:'Chiang Mai → Krabi', x:'Direktverbindung prüfen'},
+  {id:'faehre-tao', d:S('kohtao'), m:'faehre', t:'Minibus und Fähre Khao Sok → Koh Tao', x:'Kombiticket über Surat Thani'},
+  {id:'samui', d:S('samui'), m:'hotel', t:'Koh Samui, 24. bis 27. März'},
   {id:'phangan', d:ph.start, m:'hotel', t:`Koh Phangan, ${ph.k === 1 ? '1 Nacht' : ph.k + ' Nächte'} zur Full Moon Party`, x: ph.k === 1 ? 'Mindestaufenthalt prüfen' : 'Party-Woche, früh buchen'},
-  {id:'urt-han', d:S('transit'), m:'flug', t:'Koh Samui → Bangkok → Hanoi', x:'Am 27. März, Ausreise Thailand an Tag 29'},
+  {id:'urt-han', d:S('hanoi'), m:'flug', t:'Koh Samui → Bangkok → Hanoi', x:'Am 28. März, letzter erlaubter Tag in Thailand: früh fliegen'},
   {id:'hagiang', d:S('hagiang'), m:'tour', t:'Ha Giang Loop mit Easy Rider', x:'Vor Ort in Hanoi oder Ha Giang'},
   {id:'zug-hue', d:S('hue'), m:'zug', t:'Nachtzug Ninh Binh → Hue'},
   {id:'dad-sgn', d:S('saigon'), m:'flug', t:'Da Nang → Saigon'},
@@ -695,11 +680,11 @@ const FLIGHT_SEGMENTS = 14; // regionale Segmente inkl. Umstiege, siehe Route-Ch
 const activeFindings = () => FINDINGS.filter(f => !f.onlyIn || f.onlyIn.includes(variant));
 const SEV = { kritisch:['Kritisch','var(--bad)'], pruefen:['Prüfen','var(--warn)'], hinweis:['Hinweis','var(--info)'], option:['Option','var(--opt)'] };
 const FINDINGS = [
-  {id:'transit23', sev:'kritisch', stop:'transit', t:'Die Nacht vom 27. auf den 28. März fehlt im Plan',
-   d:'Thailand endet nach Koh Samui am 27. März, Vietnam beginnt laut Plan erst am 28. Für die Nacht dazwischen gibt es weder Unterkunft noch Flug. Bleibt ihr diese Nacht in Bangkok, verlasst ihr Thailand am 28. März, also am 30. und letzten erlaubten Tag ohne Puffer.',
-   fix:'Am 27. von Koh Samui über Bangkok bis Hanoi durchfliegen und Hanoi um eine Nacht verlängern. Thailand-Ausreise bleibt am Tag 29.', todo:{t:'Transit 27. März festlegen: Flug Koh Samui → Bangkok → Hanoi, Hanoi ab 27. buchen', g:'2026-12', due:'2026-12-15'}},
+  {id:'visa-th', sev:'pruefen', stop:'samui', t:'Ausreise aus Thailand am letzten erlaubten Tag',
+   d:'Ihr reist am 27. Februar ein und am 28. März aus. Das ist Tag 30 von 30 und damit erlaubt, aber ohne Puffer. Fällt der Flug nach Hanoi aus, überzieht ihr das Visum.',
+   fix:'Am 28. März einen frühen Flug ab Koh Samui nehmen, damit am selben Tag noch Ersatzflüge gehen. Für einen Tag Puffer Koh Samui auf 3 Nächte kürzen und am 27. fliegen.', todo:{t:'Flug Koh Samui → Bangkok → Hanoi am 28. März früh buchen', g:'2026-12', due:'2026-12-15'}},
   {id:'fluege', sev:'pruefen', t:'Es sind rund 14 regionale Flugsegmente, nicht 6 bis 8',
-   d:'Mit Umstiegen kommen zusammen: Colombo → Bangkok, Chiang Mai → Phuket, Surat Thani → Bangkok → Hanoi, Da Nang → Saigon, Saigon → Tokio, Japan → Manila, Manila → Puerto Princesa, Coron → Cebu → Siargao, Siargao → Cebu → Kuala Lumpur, Singapur → Bali, Labuan Bajo → Bali. Das Budget rechnet mit ca. 9 Flügen.',
+   d:'Mit Umstiegen kommen zusammen: Colombo → Bangkok, Chiang Mai → Krabi, Koh Samui → Bangkok → Hanoi, Da Nang → Saigon, Saigon → Tokio, Japan → Manila, Manila → Puerto Princesa, Coron → Cebu → Siargao, Siargao → Cebu → Kuala Lumpur, Singapur → Bali, Labuan Bajo → Bali. Das Budget rechnet mit ca. 9 Flügen.',
    fix:'Im Buchungen-Tab alle Strecken mit ersten Preisen versehen und den Flugposten im Budget neu schätzen.', todo:{t:'Flugbudget neu schätzen: alle 14 Regionalsegmente mit Preisen hinterlegen', g:'2026-11', due:'2026-11-30'}},
   {id:'pruefung', sev:'pruefen', t:'Januar ist dein Prüfungsmonat',
    d:'Die mündliche IHK-Prüfung liegt im Januar 2027. Im Januar stehen aber noch Japan-Unterkünfte, Koh Phangan, Koh Samui, eSIM und Dokumente an.',
@@ -711,8 +696,8 @@ const FINDINGS = [
    d:'Zwischen Coron und Siargao gibt es in der Regel keinen Direktflug, ihr steigt in Cebu oder Manila um. Von Siargao nach Kuala Lumpur ebenso. Siargao hat dadurch effektiv eher 4 volle Tage.',
    fix:'Umstiegszeiten großzügig planen und beide Flüge zusammen buchen. Alternative unter Optionen: Siargao streichen.', todo:{t:'Flugverbindungen Coron → Siargao und Siargao → KL recherchieren', g:'2026-12', due:'2026-12-20'}},
   {id:'rauch', sev:'pruefen', stop:'chiangmai', t:'Rauchsaison in Nordthailand',
-   d:'Ihr seid vom 2. bis 8. März in Chiang Mai und Pai. Die Brandrodung beginnt typischerweise im Februar, der Höhepunkt liegt im März und April. Durch die Verschiebung ist das Risiko etwas höher als vorher.',
-   fix:'Eine Woche vorher die Luftqualität prüfen. Bei schlechten Werten Pai kürzen und die Tage auf Koh Lanta oder Koh Tao legen. FFP2-Masken einpacken.'},
+   d:'Ihr seid vom 2. bis 7. März in Chiang Mai und Pai. Die Brandrodung beginnt typischerweise im Februar, der Höhepunkt liegt im März und April. Durch die Verschiebung ist das Risiko etwas höher als vorher.',
+   fix:'Eine Woche vorher die Luftqualität prüfen. Bei schlechten Werten Pai streichen und die Tage auf Krabi oder Koh Tao legen. FFP2-Masken einpacken.'},
   {id:'boot', sev:'pruefen', stop:'boot', t:'Abfahrtstag der Bootstour bestimmt den Indonesien-Plan',
    d:'Die Sharing-Touren starten nur an bestimmten Wochentagen. Laut Plan müsstet ihr am 3. Juni ab Lombok los.',
    fix:'Zuerst Anbieter und Abfahrtstag festlegen, dann Ubud, Nusa Penida, Uluwatu, Gili Air und Lombok darum herum planen. Der Bali-Puffer am Ende fängt Verschiebungen auf.', todo:{t:'Abfahrtstage der Bootstour-Anbieter prüfen, Indonesien-Daten daran ausrichten', g:'2027-01', due:'2027-01-10'}},
@@ -728,9 +713,6 @@ const FINDINGS = [
   {id:'jrpass', sev:'hinweis', stop:'kyoto', t:'Japan Rail Pass rechnet sich wahrscheinlich nicht',
    d:'Eure Strecke ist Tokio → Hakone → Kyoto → Osaka plus Tagesausflug Hiroshima. Seit der Preiserhöhung 2023 sind Einzeltickets auf so einer Route meist günstiger als der 7-Tage-Pass.',
    fix:'Mit einem Japan-Routenrechner (z. B. Navitime oder Jorudan) die Einzelpreise summieren und mit dem Pass vergleichen.', todo:{t:'Japan: Einzeltickets vs. JR Pass durchrechnen', g:'2026-12', due:'2026-12-31'}},
-  {id:'tempo', onlyIn:['plan'], sev:'option', stop:'phuket', t:'Thailand-Süden ist sehr dicht',
-   d:'Phuket, Koh Lanta, Khao Sok, Koh Tao, Koh Samui und Koh Phangan in 18 Nächten: alle 3 Tage ein Ortswechsel, oft mit halbem Reisetag.',
-   fix:'Phuket streichen und die 3 Nächte auf Koh Lanta und Khao Sok verteilen. Muay-Thai-Training geht auch in Bangkok oder Chiang Mai. Koh Phi Phi liegt ohnehin auf der Fähre nach Koh Lanta.'},
   {id:'siargao', sev:'option', stop:'siargao', t:'Siargao streichen, Palawan verlängern',
    d:'Siargao kostet 2 bis 3 zusätzliche Flugsegmente und einen Reisetag. Ohne Siargao hätte Palawan 18 Nächte, und ihr fliegt von Coron über Manila nach Kuala Lumpur.',
    fix:'Nur sinnvoll, wenn Surfen nicht weit oben steht. Spart Geld und Stress, kostet die Surf-Insel.'}
@@ -741,7 +723,7 @@ const MONTHS = ['Feb','Mär','Apr','Mai','Jun'];
 const SEASON = [
   ['Sri Lanka Süd/West','LK',['g','g','o','b','b'],[0]],
   ['Nordthailand','TH',['g','o','b','b','b'],[1]],
-  ['Andamanensee (Phuket, Lanta)','TH',['g','g','o','b','b'],[1]],
+  ['Andamanensee (Krabi, Phi Phi)','TH',['g','g','o','b','b'],[1]],
   ['Golf (Tao, Samui, Phangan)','TH',['g','g','g','g','o'],[1]],
   ['Nordvietnam','VN',['o','o','g','o','b'],[1,2]],
   ['Zentralvietnam (Hue, Hoi An)','VN',['o','g','g','g','o'],[2]],
@@ -1007,7 +989,7 @@ $('#day').addEventListener('input', e => { stopPlay(); state.day = +e.target.val
 
 const EVENTS = [
   { d: -1, t: 'ICE und Abflug FRA → CMB' }, { d: 0, t: 'Ankunft Colombo 16:30' }, { d: idxISO('2027-02-20'), t: 'Poya-Tag Sri Lanka' }, { d: idxISO('2027-02-27'), t: 'TG308 nach Bangkok, 01:00' },
-  { d: idxISO('2027-03-22'), t: 'Full Moon Party' }, { d: idxISO('2027-03-27'), t: 'Ausreise Thailand (Tag 29/30)' },
+  { d: idxISO('2027-03-22'), t: 'Full Moon Party' }, { d: idxISO('2027-03-28'), t: 'Ausreise Thailand (Tag 30/30)' },
   { d: idxISO('2027-04-29'), t: 'Golden Week Japan (ihr seid weg)' }, { d: idxISO('2027-05-16'), t: 'Eid al-Adha (vorauss.)' },
   { d: S('boot'), t: 'Start Bootstour' }, { d: NIGHTS, t: 'Rückflug DPS → HAM' }
 ];
@@ -1245,6 +1227,8 @@ function variantStats(v) {
   return { n: th.length, moves: th.length - 1, avg: nights / th.length, longest, dropped, longer, total: BASE.length - plan.length + th.length };
 }
 function renderVariantBar() {
+  $('#variant-bar').hidden = VARIANTS.length < 2; $('#tablist [data-tab=varianten]').hidden = VARIANTS.length < 2;
+  if (VARIANTS.length < 2) return;
   const v = VARIANTS.find(x => x.id === variant);
   $('#variant-bar').innerHTML = `<span class="lbl">Thailand-Variante</span><div class="seg-ctl" id="var-switch">${VARIANTS.map(x => `<button type="button" data-v="${x.id}" class="${x.id === variant ? 'on' : ''}">${esc(x.n)}</button>`).join('')}</div>
     <span class="note">${variant === 'plan' ? 'Ihr seht den aktuellen Reiseplan.' : `<b>Vorschau:</b> ${esc(v.n)}. Der Reiseplan selbst ist unverändert.`} <button class="iconbtn" data-tabjump="varianten">Varianten vergleichen</button></span>`;
@@ -1262,6 +1246,7 @@ document.addEventListener('click', e => {
   if (tj) { showTab(tj.dataset.tabjump); history.replaceState(null, '', '#' + tj.dataset.tabjump); }
 });
 function renderVariants() {
+  if (VARIANTS.length < 2) return;
   const votes = state.votes, nm = state.names;
   const agree = votes.a && votes.a === votes.b ? VARIANTS.find(x => x.id === votes.a) : null;
   $('#var-agree').hidden = !agree;
