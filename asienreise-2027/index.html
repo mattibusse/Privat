@@ -570,8 +570,9 @@ const BASE = [
   {id:'tissa',c:'LK',n:'Tissamaharama (Yala)',k:1,ll:[6.28,81.29],mode:'bus',via:'Bus oder Tuk-Tuk',hl:['Jeep-Safari Yala am frühen Morgen','Chance auf Leoparden, Elefanten, Krokodile']},
   {id:'tangalle',c:'LK',n:'Tangalle',k:1,ll:[6.02,80.79],mode:'bus',via:'Bus',hl:['Ruhige, fast leere Strände']},
   {id:'mirissa',c:'LK',n:'Mirissa & Weligama',k:2,ll:[5.95,80.46],mode:'bus',via:'Bus oder Tuk-Tuk',hl:['Walbeobachtung in Mirissa','Surfkurs in Weligama','Coconut Tree Hill'],},
-  {id:'galle',c:'LK',n:'Unawatuna & Galle',k:2,ll:[6.03,80.24],mode:'auto',via:'Tuk-Tuk',hl:['Jungle Beach, Schnorcheln','Fort Galle bei Sonnenuntergang','Danach Zug Galle → Colombo']},
-  {id:'bangkok',c:'TH',n:'Bangkok',k:3,ll:[13.75,100.50],mode:'flug',path:[[6.93,79.85,'zug']],via:'Zug nach Colombo, Direktflug Colombo → Bangkok',hl:['Grand Palace, Wat Pho, Wat Arun','Chinatown, Khao San Road, Rooftop-Bar','Muay-Thai-Kampf im Rajadamnern oder Lumpinee','Ausflug Ayutthaya oder schwimmender Markt'],tip:'Kampftage der Stadien vorher prüfen und den Abend danach legen.'},
+  {id:'galle',c:'LK',n:'Unawatuna & Galle',k:1,ll:[6.03,80.24],mode:'auto',via:'Tuk-Tuk',hl:['Jungle Beach, Schnorcheln','Fort Galle am nächsten Tag, bevor es zum Flughafen geht']},
+  {id:'cmbflug',c:'LK',n:'Nachtflug nach Bangkok',k:1,ll:[7.18,79.88],mode:'auto',via:'Fahrer oder Zug Galle → Flughafen Colombo, etwa 2 bis 3 Stunden',hl:['Vormittags noch Unawatuna, nachmittags Fort Galle','Abends zum Flughafen, spätestens gegen 22:00 dort','TG308 ab 01:00, Ankunft Bangkok 06:10'],tip:'Diese Nacht verbringt ihr am Flughafen und im Flugzeug. Ein Fahrer direkt von Galle zum Flughafen ist bequemer als Zug plus Umstieg in Colombo.'},
+  {id:'bangkok',c:'TH',n:'Bangkok',k:3,ll:[13.75,100.50],mode:'flug',via:'THAI TG308 Colombo → Bangkok, nonstop, Ankunft 06:10',hl:['Grand Palace, Wat Pho, Wat Arun','Chinatown, Khao San Road, Rooftop-Bar','Muay-Thai-Kampf im Rajadamnern oder Lumpinee','Ausflug Ayutthaya oder schwimmender Markt'],tip:'Ankunft schon um 06:10: Early Check-in anfragen oder Gepäck im Hotel lassen und direkt los. Kampftage der Stadien vorher prüfen.'},
   {id:'chiangmai',c:'TH',n:'Chiang Mai',k:4,ll:[18.79,98.98],mode:'zug',via:'Nachtzug ab Bangkok',hl:['Altstadt-Tempel, Doi Suthep','Kochkurs','Elefanten nur in echten Schutzprojekten ohne Reiten','Tagesausflug Chiang Rai zum Weißen Tempel'],tip:'Rauchsaison: eine Woche vorher Luftqualität (AQI) prüfen, FFP2-Masken dabei haben.'},
   {id:'pai',c:'TH',n:'Pai',k:3,ll:[19.36,98.44],mode:'bus',via:'Minibus, sehr kurvig',hl:['Pai Canyon','Wasserfälle','Rollertouren']},
   {id:'phuket',c:'TH',n:'Phuket',k:3,ll:[7.82,98.30],mode:'flug',path:[[18.77,98.96,'bus']],via:'Minibus nach Chiang Mai, Flug Chiang Mai → Phuket',hl:['Altstadt, Big Buddha, Promthep Cape','Kata oder Karon statt Patong','Tagestour Koh Phi Phi (Maya Bay) oder Phang Nga Bucht','Muay-Thai-Schnupperstunden an der Soi Ta-iad']},
@@ -659,7 +660,7 @@ function buildBookings() {
   {id:'lh-hin', d:-1, m:'flug', t:'Frankfurt → Doha → Colombo, 22:05 → 16:30 (+1)', x:'Qatar (QR72 + QR654), bei Kiwi 451 € p. P. mit Gepäck. Preis direkt bei Qatar vergleichen'},
   {id:'eta-lk', d:-3, m:'doc', t:'Sri Lanka ETA online', x:'Kostenlos, vor dem Abflug'},
   {id:'negombo', d:S('negombo'), m:'hotel', t:'Unterkunft Negombo'},
-  {id:'cmb-bkk', d:S('bangkok'), m:'flug', t:'Colombo → Bangkok'},
+  {id:'cmb-bkk', d:S('bangkok'), m:'flug', t:'THAI TG308 Colombo → Bangkok, 01:00 → 06:10', x:'Abflug in der Nacht vom 26. auf den 27. Feb'},
   {id:'zug-cnx', d:S('chiangmai'), m:'zug', t:'Nachtzug Bangkok → Chiang Mai', x:'Schlafwagen ist oft früh ausgebucht'},
   {id:'cnx-hkt', d:S('phuket'), m:'flug', t:'Chiang Mai → Phuket'},
   {id:'cnx-kbv', d:S('phuket') == null ? S('lanta') : undefined, m:'flug', t:'Chiang Mai → Krabi', x:'Direktverbindung prüfen'},
@@ -1005,7 +1006,7 @@ $('#play').onclick = () => {
 $('#day').addEventListener('input', e => { stopPlay(); state.day = +e.target.value; const s = stopAt(state.day); if (s.i !== state.sel) selectStop(s.i, { zoom: false, keepDay: true }); else renderDay(); });
 
 const EVENTS = [
-  { d: -1, t: 'ICE und Abflug FRA → CMB' }, { d: 0, t: 'Ankunft Colombo 16:30' }, { d: idxISO('2027-02-20'), t: 'Poya-Tag Sri Lanka' },
+  { d: -1, t: 'ICE und Abflug FRA → CMB' }, { d: 0, t: 'Ankunft Colombo 16:30' }, { d: idxISO('2027-02-20'), t: 'Poya-Tag Sri Lanka' }, { d: idxISO('2027-02-27'), t: 'TG308 nach Bangkok, 01:00' },
   { d: idxISO('2027-03-22'), t: 'Full Moon Party' }, { d: idxISO('2027-03-27'), t: 'Ausreise Thailand (Tag 29/30)' },
   { d: idxISO('2027-04-29'), t: 'Golden Week Japan (ihr seid weg)' }, { d: idxISO('2027-05-16'), t: 'Eid al-Adha (vorauss.)' },
   { d: S('boot'), t: 'Start Bootstour' }, { d: NIGHTS, t: 'Rückflug DPS → HAM' }
