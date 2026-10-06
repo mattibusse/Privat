@@ -285,6 +285,37 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
 .rates label{display:grid;grid-template-columns:auto minmax(0,1fr) 44px;gap:6px;align-items:center;font-size:.86rem}
 .rates input{width:100%}
 
+/* Aktivitäten, Unterkünfte, Kalender */
+.chipbar{display:flex;flex-wrap:wrap;gap:6px}
+.chipbar button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 11px;font-size:.82rem;font-weight:600;display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+.chipbar button.on{border-color:var(--ink);color:var(--ink);background:var(--surface-2)}
+.act-country{margin-top:18px}
+.act-country>h3{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.act-stop{padding:10px 14px;border-bottom:1px solid var(--line)}
+.act-stop:last-child{border-bottom:0}
+.act-stop .hd{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:4px}
+.act-stop ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.act-stop li{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:6px;align-items:baseline;font-size:.92rem}
+.act-stop li .star{color:var(--warn);font-size:.85rem}
+.cat{font-size:.7rem;font-weight:600;padding:1px 7px;border-radius:999px;white-space:nowrap;border:1px solid var(--line);color:var(--muted)}
+.uk-stop{padding:12px 14px;border-bottom:1px solid var(--line)}
+.uk-stop:last-child{border-bottom:0}
+.uk-stop .hd{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.uk-stop .hd .d{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.uk-opt{display:grid;grid-template-columns:minmax(0,1fr) 190px 118px 28px;gap:10px;align-items:center;padding:8px 0;border-top:1px dashed var(--line);margin-top:8px}
+.uk-opt .nm a{font-weight:600;color:var(--ink)}
+.uk-opt .meta{font-size:.8rem;color:var(--muted)}
+.uk-opt .pr{text-align:right;font-family:var(--f-mono);font-size:.84rem}
+.uk-opt .pr small{display:block;color:var(--muted)}
+.uk-opt select{font-size:.8rem;padding:3px 6px;width:100%}
+.uk-opt[data-s=favorit] select{border-color:var(--warn);color:var(--warn)}
+.uk-opt[data-s=gebucht] select{border-color:var(--good);color:var(--good)}
+.uk-add{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1.4fr) 110px auto;gap:8px;margin-top:8px}
+.uk-badge{font-size:.74rem;font-weight:600}
+.cal{padding:14px 16px;display:grid;gap:10px;margin-bottom:16px}
+.cal .opts{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.88rem}
+.cal .opts label{display:inline-flex;gap:6px;align-items:center}
+
 @media (max-width:1000px){
   .var-grid{grid-template-columns:minmax(0,1fr)}
   .stats.five{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -299,6 +330,9 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
   .expform{grid-template-columns:minmax(0,1fr)}
   .exp{grid-template-columns:58px minmax(0,1fr) auto 26px}
   .addform{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .uk-opt{grid-template-columns:minmax(0,1fr) 110px}
+  .uk-opt .pr{text-align:left}
+  .uk-add{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .addform input[type=text]{grid-column:1/-1}
   .bk{grid-template-columns:84px minmax(0,1fr);}
   .bk .m{display:none}
@@ -329,9 +363,11 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
   <nav class="tabs" aria-label="Bereiche"><div class="in" role="tablist" id="tablist">
     <button role="tab" data-tab="route" aria-selected="true">Karte &amp; Route</button>
     <button role="tab" data-tab="varianten">Varianten<span class="badge" id="b-var"></span></button>
+    <button role="tab" data-tab="aktivitaeten">Aktivitäten</button>
     <button role="tab" data-tab="check">Route-Check<span class="badge" id="b-check"></span></button>
     <button role="tab" data-tab="todos">To-dos<span class="badge" id="b-todos"></span></button>
     <button role="tab" data-tab="buchungen">Buchungen<span class="badge" id="b-book"></span></button>
+    <button role="tab" data-tab="unterkuenfte">Unterkünfte<span class="badge" id="b-uk"></span></button>
     <button role="tab" data-tab="budget">Budget</button>
     <button role="tab" data-tab="ausgaben">Ausgaben</button>
     <button role="tab" data-tab="einreise">Einreise</button>
@@ -374,6 +410,14 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
     <div class="var-grid" id="var-grid"></div>
     <div class="panel" style="margin-top:16px"><div style="padding:14px 16px 4px"><h3>Direkter Vergleich</h3></div><div class="tbl" id="var-table"></div></div>
     <div class="panel card" style="margin-top:16px"><h3>Notizen zur Entscheidung</h3><p class="muted" style="font-size:.86rem">Für euch beide sichtbar. Wird beim Verlassen des Feldes gespeichert.</p><textarea id="var-notes" rows="4" style="margin-top:8px" placeholder="z. B. Muay Thai ist uns wichtig, Khao Sok eher nicht"></textarea></div>
+  </section>
+
+  <!-- AKTIVITÄTEN -->
+  <section class="tab" id="tab-aktivitaeten" hidden>
+    <div class="sec-head"><div><h2>Aktivitäten</h2><p class="muted">Was ihr an den Stationen eurer Route machen könnt. Mit Stern: meine Top-Empfehlungen.</p></div></div>
+    <div class="chipbar" id="act-countries"></div>
+    <div class="chipbar" id="act-cats" style="margin-top:8px"></div>
+    <div id="act-list"></div>
   </section>
 
   <!-- ROUTE-CHECK -->
@@ -425,7 +469,23 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
       <div><h2>Buchungen</h2><p class="muted">Alle Strecken und die Unterkünfte, die früh weg sind. Status und Buchungsnummer werden für euch beide gespeichert.</p></div>
       <div class="toolbar"><div class="progress" style="width:180px"><i id="bk-prog" style="width:0"></i></div><span class="mono muted" id="bk-count"></span></div>
     </div>
+    <div class="panel cal" id="cal">
+      <div><h3>Kalender exportieren</h3><p class="muted" style="font-size:.86rem">Lädt eine ZIP-Datei mit einer Kalenderdatei (.ics) herunter. Entpacken und die .ics-Datei öffnen, dann landen die Termine in Google, Apple oder Outlook. Funktioniert für euch beide.</p></div>
+      <div class="opts"><label><input type="checkbox" id="cal-stops" checked> Stationen</label><label><input type="checkbox" id="cal-flights" checked> Flüge mit Uhrzeit</label><label><input type="checkbox" id="cal-todos" checked> Fristen aus den To-dos</label></div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn primary" id="cal-go">Kalender herunterladen</button><button class="btn" id="cal-copy" hidden>Kalendertext kopieren</button><span class="muted" id="cal-msg" style="font-size:.84rem"></span></div>
+    </div>
     <div class="panel items" id="bookings"></div>
+  </section>
+
+  <!-- UNTERKÜNFTE -->
+  <section class="tab" id="tab-unterkuenfte" hidden>
+    <div class="sec-head">
+      <div><h2>Unterkünfte</h2><p class="muted">Pro Station Favoriten sammeln und den Status pflegen. Preise sind für ein Zimmer zu zweit, Stand der Suche. Vorschläge stammen aus einer Booking.com-Suche.</p></div>
+      <div class="toolbar"><div class="progress" style="width:180px"><i id="uk-prog" style="width:0"></i></div><span class="mono muted" id="uk-count"></span></div>
+    </div>
+    <div class="stats five" id="uk-stats" style="margin-top:0;grid-template-columns:repeat(3,minmax(0,1fr))"></div>
+    <div class="chipbar" id="uk-filter" style="margin-top:14px"></div>
+    <div id="uk-list"></div>
   </section>
 
   <!-- BUDGET -->
@@ -766,7 +826,7 @@ const GROUPS = [['2026-10','Oktober 2026'],['2026-11','November 2026'],['2026-12
 const state = {
   sel: 0, day: Math.min(Math.max(TODAY, 0), NIGHTS - 1),
   names: { a: 'Matti', b: 'Partner' }, pass: { a: '', b: '' },
-  todos: [], pack: [], bookings: {}, checks: {}, exp: [], rates: {}, votes: { a: '', b: '' }, varNotes: '',
+  todos: [], pack: [], bookings: {}, checks: {}, exp: [], rates: {}, uk: [], votes: { a: '', b: '' }, varNotes: '',
   todoFilter: store.get('ar27.todoFilter') || 'open',
   db: null, canWrite: false, dbReady: false
 };
@@ -798,7 +858,7 @@ function renderHeader() {
 }
 
 /* ========== Tabs ========== */
-const TABS = ['route','varianten','check','todos','buchungen','budget','ausgaben','einreise','packliste'];
+const TABS = ['route','varianten','aktivitaeten','check','todos','buchungen','unterkuenfte','budget','ausgaben','einreise','packliste'];
 function showTab(id) {
   if (!TABS.includes(id)) id = 'route';
   $$('#tablist button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === id)));
@@ -1217,6 +1277,191 @@ $('#pack-add').addEventListener('submit', async e => {
 
 function renderWho() { $('#todo-who').innerHTML = `<option value="ab">Beide</option><option value="a">${esc(state.names.a)}</option><option value="b">${esc(state.names.b)}</option>`; }
 
+/* ========== Aktivitäten ========== */
+const ACT_CATS = { natur:['Natur','var(--c-VN)'], wasser:['Wasser & Strand','var(--c-PH)'], kultur:['Kultur','var(--c-JP)'], essen:['Essen','var(--c-LK)'], action:['Action & Sport','var(--c-ID)'], abends:['Abends','var(--c-MY)'] };
+const ACTS = [
+  ['sigiriya','kultur','Löwenfelsen Sigiriya früh morgens besteigen, bevor es heiß und voll wird',1],['sigiriya','natur','Pidurangala Rock zum Sonnenaufgang mit Blick auf Sigiriya',1],['sigiriya','kultur','Höhlentempel von Dambulla'],['sigiriya','natur','Jeep-Safari Minneriya oder Kaudulla mit großen Elefantenherden',1],['sigiriya','kultur','Polonnaruwa, die alte Königsstadt, am besten mit dem Rad (Tagesausflug)'],
+  ['kandy','kultur','Zahntempel (Sri Dalada Maligawa)'],['kandy','natur','Botanischer Garten Peradeniya'],['kandy','kultur','Kandy-Tanzshow am Abend'],
+  ['ella','natur','Zugfahrt Kandy → Ella durch die Teeplantagen',1],['ella','natur','Nine Arch Bridge, am besten wenn ein Zug kommt',1],['ella','natur','Little Adam\'s Peak zum Sonnenaufgang'],['ella','natur','Ella Rock, halber Tag'],['ella','essen','Teefabrik besichtigen und Ceylon-Tee probieren'],
+  ['tissa','natur','Jeep-Safari im Yala-Nationalpark ab Sonnenaufgang, Chance auf Leoparden',1],
+  ['mirissa','wasser','Walbeobachtung, mit Glück Blauwale',1],['mirissa','action','Surfkurs in Weligama, ideal für Anfänger',1],['mirissa','natur','Coconut Tree Hill zum Sonnenuntergang'],['mirissa','wasser','Schnorcheln am Jungle Beach bei Unawatuna'],['mirissa','kultur','Fort Galle, auch als Stopp auf dem Weg zum Flughafen'],['mirissa','essen','Rice & Curry, Kottu und Hoppers probieren'],
+  ['bangkok','kultur','Grand Palace, Wat Pho und Wat Arun',1],['bangkok','action','Muay-Thai-Kampf im Rajadamnern- oder Lumpinee-Stadion',1],['bangkok','essen','Streetfood in Chinatown am Abend'],['bangkok','abends','Rooftop-Bar mit Blick über die Stadt'],['bangkok','kultur','Chatuchak-Wochenendmarkt (Sa/So, passt zu eurer Ankunft)'],['bangkok','kultur','Tagesausflug Ayutthaya'],
+  ['chiangmai','action','Muay-Thai-Training im Gym, Anfängerstunden möglich',1],['chiangmai','essen','Thai-Kochkurs mit Marktbesuch',1],['chiangmai','kultur','Tempel Doi Suthep über der Stadt'],['chiangmai','natur','Elefanten-Schutzprojekt ohne Reiten'],['chiangmai','kultur','Tagesausflug Chiang Rai zum Weißen Tempel'],['chiangmai','abends','Night Bazaar'],
+  ['pai','natur','Pai Canyon zum Sonnenuntergang',1],['pai','action','Rollertour durch die Berge'],['pai','natur','Heiße Quellen und Wasserfälle'],
+  ['krabi','action','Klettern an Railay Beach, Anfängerkurse möglich',1],['krabi','wasser','4-Islands-Tour mit Schnorcheln'],['krabi','wasser','Kajak durch Mangroven und Kalkfelsen'],['krabi','natur','Tiger Cave Tempel, über 1.200 Stufen zum Aussichtspunkt'],
+  ['phiphi','wasser','Schnorcheln an Bamboo Island und Shark Point',1],['phiphi','natur','Maya Bay ansehen (Baden ist dort meines Wissens nicht erlaubt)'],['phiphi','natur','Viewpoint zum Sonnenuntergang'],['phiphi','abends','Strandpartys an der Loh Dalum Bay'],
+  ['khaosok','natur','Nacht im Floß-Bungalow auf dem Cheow-Lan-See',1],['khaosok','natur','Dschungelwanderung mit Guide'],['khaosok','wasser','Kanutour auf dem Fluss'],
+  ['kohtao','action','Tauchschein (Open Water), dauert meist 3 bis 4 Tage',1],['kohtao','wasser','Schnorcheln in der Shark Bay und bei Koh Nang Yuan',1],['kohtao','natur','Wanderung zu Aussichtspunkten'],
+  ['phangan','abends','Full Moon Party am Haad Rin Beach (22. März)',1],['phangan','wasser','Bottle Beach oder Thong Nai Pan zum Erholen'],
+  ['samui','wasser','Bootstour Ang Thong Marine Park: Kajak, Schnorcheln, Aussichtspunkt',1],['samui','kultur','Big Buddha und Fisherman\'s Village'],['samui','natur','Na-Muang-Wasserfall'],
+  ['hanoi','essen','Streetfood-Tour durch die Altstadt: Pho, Bun Cha, Egg Coffee',1],['hanoi','kultur','Train Street und Hoan-Kiem-See'],['hanoi','kultur','Wasserpuppentheater'],['hanoi','abends','Bia Hoi, frisch gezapftes Bier an der Straßenecke'],
+  ['hagiang','action','Ha Giang Loop mit Easy Rider über den Ma-Pi-Leng-Pass',1],
+  ['ninhbinh','natur','Bootstour durch Tam Coc oder Trang An',1],['ninhbinh','natur','Aussichtspunkt Hang Mua'],['ninhbinh','action','Radtour durch die Reisfelder'],
+  ['hue','kultur','Kaiserstadt und Kaisergräber'],['hue','essen','Bun Bo Hue probieren'],
+  ['hoian','kultur','Altstadt mit Laternen am Abend',1],['hoian','kultur','Maßgeschneiderte Kleidung beim Schneider'],['hoian','essen','Kochkurs'],['hoian','action','Hai-Van-Pass mit Roller oder Easy Rider',1],['hoian','wasser','Strand An Bang'],
+  ['saigon','kultur','Cu-Chi-Tunnel',1],['saigon','kultur','Kriegsrestemuseum'],['saigon','natur','Tagestour ins Mekong-Delta'],['saigon','abends','Rooftop-Bars und Nachtleben in Distrikt 1'],
+  ['tokio','kultur','Shibuya Crossing und Shinjuku bei Nacht',1],['tokio','kultur','Senso-ji Tempel in Asakusa'],['tokio','kultur','teamLab, digitales Kunstmuseum'],['tokio','essen','Tsukiji-Außenmarkt: Sushi zum Frühstück'],['tokio','abends','Omoide Yokocho und Golden Gai, winzige Bars'],['tokio','kultur','Akihabara: Elektronik und Anime'],
+  ['hakone','natur','Hakone-Rundtour: Bergbahn, Seilbahn, Boot über den Ashi-See',1],['hakone','natur','Onsen und mit Glück Blick auf den Fuji',1],
+  ['kyoto','kultur','Fushimi Inari früh morgens, bevor die Massen kommen',1],['kyoto','natur','Bambuswald Arashiyama'],['kyoto','kultur','Goldener Pavillon und Kiyomizu-dera'],['kyoto','kultur','Gion am Abend'],['kyoto','kultur','Tagesausflug Nara: Hirsche und Todai-ji'],
+  ['osaka','essen','Streetfood in Dotonbori: Takoyaki, Okonomiyaki',1],['osaka','kultur','Burg Osaka'],['osaka','kultur','Tagesausflug Hiroshima (Friedenspark) und Miyajima',1],
+  ['manila','kultur','Intramuros, die Altstadt'],
+  ['portbarton','wasser','Island Hopping mit Schnorcheln bei Meeresschildkröten',1],
+  ['elnido','wasser','Island-Hopping-Touren A bis D: Lagunen und Strände',1],['elnido','wasser','Kajak in der Big oder Small Lagoon'],['elnido','natur','Nacpan Beach'],
+  ['coron','wasser','Kayangan Lake und Twin Lagoon',1],['coron','wasser','Schnorcheln oder Tauchen an Schiffswracks aus dem Zweiten Weltkrieg',1],['coron','natur','Mt. Tapyas zum Sonnenuntergang'],['coron','natur','Heiße Quellen Maquinit'],
+  ['siargao','action','Surfkurs für Anfänger (Cloud 9 eher zum Zuschauen)',1],['siargao','wasser','Sugba Lagoon'],['siargao','wasser','Inselhopping: Naked, Daku und Guyam Island'],['siargao','wasser','Magpupungko Rock Pools, nur bei Ebbe'],['siargao','action','Rollertour durch die Palmenwälder'],
+  ['kl','kultur','Petronas Towers mit Skybridge',1],['kl','kultur','Batu Caves mit der bunten Treppe'],['kl','essen','Streetfood in der Jalan Alor'],
+  ['sg','natur','Gardens by the Bay mit Lichtshow am Abend',1],['sg','abends','Marina Bay bei Nacht'],['sg','essen','Hawker Center: günstig und gut essen',1],['sg','kultur','Chinatown und Little India'],
+  ['ubud','natur','Reisterrassen Tegallalang',1],['ubud','natur','Affenwald'],['ubud','natur','Sonnenaufgangswanderung auf den Mount Batur'],['ubud','kultur','Wassertempel Tirta Empul'],['ubud','essen','Balinesischer Kochkurs'],
+  ['penida','natur','Aussichtspunkt Kelingking Beach',1],['penida','wasser','Schnorcheln mit Mantas am Manta Point',1],['penida','natur','Broken Beach und Angel\'s Billabong'],
+  ['uluwatu','kultur','Uluwatu-Tempel mit Kecak-Tanz zum Sonnenuntergang',1],['uluwatu','action','Surfen in Canggu'],
+  ['gili','wasser','Schnorcheln mit Meeresschildkröten direkt vom Strand',1],['gili','action','Mit dem Fahrrad um die Insel'],['gili','action','Tauchen: Schnupperkurs oder Fun Dive'],
+  ['lombok','natur','Wasserfälle Tiu Kelep und Sendang Gile'],
+  ['boot','natur','Padar Island: Wanderung zum Sonnenuntergang',1],['boot','natur','Komodo-Warane mit Rangern',1],['boot','wasser','Pink Beach und Manta Point'],
+  ['flores','wasser','Tagestour Komodo-Nationalpark mit Schnorcheln'],['flores','natur','Höhle Batu Cermin'],['flores','abends','Sonnenuntergang in Labuan Bajo']
+];
+let actCountry = store.get('ar27.actC') || 'all', actCat = 'all';
+function renderActs() {
+  const order = ['LK','TH','VN','JP','PH','MY','SG','ID'];
+  $('#act-countries').innerHTML = `<button data-c="all" class="${actCountry === 'all' ? 'on' : ''}">Alle Länder</button>` + order.map(c => `<button data-c="${c}" class="${actCountry === c ? 'on' : ''}"><span class="dot" style="background:var(--c-${c})"></span>${esc(C[c].n)}</button>`).join('');
+  $('#act-cats').innerHTML = `<button data-k="all" class="${actCat === 'all' ? 'on' : ''}">Alles</button><button data-k="top" class="${actCat === 'top' ? 'on' : ''}">★ Highlights</button>` + Object.entries(ACT_CATS).map(([k, [n, col]]) => `<button data-k="${k}" class="${actCat === k ? 'on' : ''}"><span class="dot" style="background:${col}"></span>${esc(n)}</button>`).join('');
+  const items = ACTS.map(([id, cat, t, top]) => ({ s: STOPS.find(x => x.id === id), cat, t, top: !!top })).filter(a => a.s && (actCountry === 'all' || a.s.c === actCountry) && (actCat === 'all' || (actCat === 'top' ? a.top : a.cat === actCat)));
+  const html = order.filter(c => actCountry === 'all' || c === actCountry).map(c => {
+    const its = items.filter(a => a.s.c === c); if (!its.length) return '';
+    const stops = [...new Set(its.map(a => a.s))].sort((a, b) => a.start - b.start);
+    return `<div class="act-country"><h3><span class="dot" style="background:var(--c-${c})"></span>${esc(C[c].n)} <span class="mono muted" style="font-size:.8rem;font-weight:500">${its.length}</span></h3><div class="panel items">${stops.map(s => `<div class="act-stop"><div class="hd"><b>${esc(s.n)}</b><button class="iconbtn" data-goto="${s.id}">${fmt(s.start)} · auf Karte</button></div><ul>${its.filter(a => a.s === s).map(a => `<li><span class="star" aria-label="${a.top ? 'Highlight' : ''}">${a.top ? '★' : ''}</span><span>${esc(a.t)}</span><span class="cat" style="color:${ACT_CATS[a.cat][1]};border-color:${ACT_CATS[a.cat][1]}">${esc(ACT_CATS[a.cat][0])}</span></li>`).join('')}</ul></div>`).join('')}</div></div>`;
+  }).join('');
+  $('#act-list').innerHTML = html || '<div class="panel empty" style="margin-top:16px">Keine Aktivitäten für diese Auswahl.</div>';
+}
+$('#act-countries').addEventListener('click', e => { const b = e.target.closest('button[data-c]'); if (!b) return; actCountry = b.dataset.c; store.set('ar27.actC', actCountry); renderActs(); });
+$('#act-cats').addEventListener('click', e => { const b = e.target.closest('button[data-k]'); if (!b) return; actCat = b.dataset.k; renderActs(); });
+$('#act-list').addEventListener('click', e => { const g = e.target.closest('[data-goto]'); if (!g) return; showTab('route'); history.replaceState(null, '', '#route'); const st = STOPS.find(s => s.id === g.dataset.goto); if (st) selectStop(st.i); });
+
+/* ========== Unterkünfte ========== */
+const BK_Q = { negombo:'Negombo', sigiriya:'Sigiriya', kandy:'Kandy', ella:'Ella, Sri Lanka', tissa:'Tissamaharama', mirissa:'Mirissa', bangkok:'Bangkok', chiangmai:'Chiang Mai', pai:'Pai', krabi:'Ao Nang', phiphi:'Koh Phi Phi', khaosok:'Khao Sok', kohtao:'Koh Tao', phangan:'Haad Rin, Koh Phangan', samui:'Koh Samui', hanoi:'Hanoi', hagiang:'Ha Giang', ninhbinh:'Ninh Binh', hue:'Hue, Vietnam', hoian:'Hoi An', saigon:'Ho Chi Minh City', tokio:'Tokyo', hakone:'Hakone', kyoto:'Kyoto', osaka:'Osaka', manila:'Manila', portbarton:'Port Barton', elnido:'El Nido', coron:'Coron', siargao:'General Luna, Siargao', cebu:'Cebu City', kl:'Kuala Lumpur', sg:'Singapore', ubud:'Ubud', penida:'Nusa Penida', uluwatu:'Uluwatu', gili:'Gili Air', lombok:'Senaru, Lombok', flores:'Labuan Bajo', bali:'Kuta, Bali' };
+const UK_SKIP = ['cmbflug', 'boot'];
+let ukFilter = store.get('ar27.ukF') || 'offen';
+const ukStops = () => STOPS.filter(s => !UK_SKIP.includes(s.id) && !s.gap);
+const fmtE = v => Math.round(v).toLocaleString('de-DE') + ' €';
+function renderUK() {
+  const stops = ukStops(), byStop = {};
+  state.uk.forEach(u => { (byStop[u.stop] ||= []).push(u); });
+  const booked = stops.filter(s => (byStop[s.id] || []).some(u => u.s === 'gebucht'));
+  $('#uk-prog').style.width = (booked.length / stops.length * 100) + '%';
+  $('#uk-count').textContent = `${booked.length} von ${stops.length} gebucht`;
+  $('#b-uk').textContent = state.dbReady ? booked.length + '/' + stops.length : '';
+  let sumBooked = 0, sumPlan = 0, nPlan = 0;
+  stops.forEach(s => {
+    const list = byStop[s.id] || [], g = list.find(u => u.s === 'gebucht'), f = list.filter(u => u.s === 'favorit').sort((a, b) => a.ppn - b.ppn)[0];
+    if (g) sumBooked += g.ppn * s.k;
+    const pick = g || f; if (pick) { sumPlan += pick.ppn * s.k; nPlan += s.k; }
+  });
+  $('#uk-stats').innerHTML = [
+    [fmtE(sumBooked / 2), 'pro Person für gebuchte Unterkünfte'],
+    [nPlan ? fmtE(sumPlan / 2) : '–', `pro Person für gebucht plus Favoriten (${nPlan} Nächte)`],
+    [nPlan ? fmtE(sumPlan / nPlan / 2) : '–', 'Ø pro Nacht und Person']
+  ].map(([b, t]) => `<div><b class="mono">${esc(b)}</b><span>${esc(t)}</span></div>`).join('');
+  $('#uk-filter').innerHTML = [['offen','Noch nicht gebucht'],['dringend','Früh buchen'],['alle','Alle Stationen']].map(([k, n]) => `<button data-f="${k}" class="${ukFilter === k ? 'on' : ''}">${n}</button>`).join('');
+  if (!state.dbReady) { $('#uk-list').innerHTML = `<div class="panel empty" style="margin-top:14px">${state.db === null ? 'Unterkünfte sind nur in der angemeldeten Ansicht verfügbar.' : 'Lade Unterkünfte …'}</div>`; return; }
+  const URGENT = ['negombo','phangan','samui','tokio','hakone','kyoto','osaka','gili','penida'];
+  const vis = stops.filter(s => ukFilter === 'alle' ? true : ukFilter === 'dringend' ? URGENT.includes(s.id) : !booked.includes(s));
+  const ro = state.canWrite ? '' : ' disabled';
+  const order = ['LK','TH','VN','JP','PH','MY','SG','ID'];
+  $('#uk-list').innerHTML = order.map(c => {
+    const ss = vis.filter(s => s.c === c); if (!ss.length) return '';
+    return `<div class="act-country"><h3><span class="dot" style="background:var(--c-${c})"></span>${esc(C[c].n)}</h3><div class="panel items">${ss.map(s => {
+      const list = (byStop[s.id] || []).sort((a, b) => ({ gebucht: 0, favorit: 1, idee: 2 }[a.s] - { gebucht: 0, favorit: 1, idee: 2 }[b.s]) || a.ppn - b.ppn);
+      const isB = list.some(u => u.s === 'gebucht');
+      const url = `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(BK_Q[s.id] || s.n)}&checkin=${isoOf(s.start)}&checkout=${isoOf(s.end)}&group_adults=2&no_rooms=1&group_children=0`;
+      return `<div class="uk-stop" data-stop="${s.id}"><div class="hd"><div><b>${esc(s.n)}</b> ${isB ? '<span class="uk-badge ok">✓ gebucht</span>' : URGENT.includes(s.id) ? '<span class="uk-badge mid">früh buchen</span>' : ''}<div class="d">${fmt(s.start, true)} – ${fmt(s.end, true)} · ${s.k} ${s.k === 1 ? 'Nacht' : 'Nächte'}</div></div><a class="iconbtn" href="${url}" target="_blank" rel="noopener">Auf Booking.com suchen ↗</a></div>
+        ${list.length ? list.map(u => `<div class="uk-opt" data-id="${esc(u.id)}" data-s="${esc(u.s)}"><div style="min-width:0"><div class="nm">${u.link ? `<a href="${esc(u.link)}" target="_blank" rel="noopener">${esc(u.name)} ↗</a>` : `<b>${esc(u.name)}</b>`}</div><div class="meta">${u.rating ? `Bewertung ${String(u.rating).replace('.', ',')}${u.reviews ? ` (${u.reviews.toLocaleString('de-DE')})` : ''}` : 'ohne Bewertung'}${u.note ? ' · ' + esc(u.note) : ''}</div></div>
+          <div class="pr">${fmtE(u.ppn)} / Nacht<small>${fmtE(u.ppn / 2)} p. P. · gesamt ${fmtE(u.ppn * s.k)}</small></div>
+          <select data-act="s"${ro} aria-label="Status ${esc(u.name)}"><option value="idee"${u.s === 'idee' ? ' selected' : ''}>Idee</option><option value="favorit"${u.s === 'favorit' ? ' selected' : ''}>Favorit</option><option value="gebucht"${u.s === 'gebucht' ? ' selected' : ''}>Gebucht</option></select>
+          <span>${state.canWrite ? '<button class="iconbtn" data-act="del" aria-label="Entfernen">✕</button>' : ''}</span></div>`).join('') : '<div class="muted" style="font-size:.86rem;margin-top:6px">Noch keine Unterkunft gesammelt.</div>'}
+        ${state.canWrite ? `<details style="margin-top:6px"><summary class="muted" style="font-size:.82rem;cursor:pointer">Unterkunft hinzufügen</summary><form class="uk-add" data-stop="${s.id}"><input type="text" name="name" placeholder="Name" required aria-label="Name"><input type="text" name="link" placeholder="Link (optional)" aria-label="Link"><input type="number" name="ppn" min="0" step="any" placeholder="€ / Nacht" required aria-label="Preis pro Nacht"><button class="btn small primary">Hinzufügen</button></form></details>` : ''}
+      </div>`;
+    }).join('')}</div></div>`;
+  }).join('') || '<div class="panel empty" style="margin-top:14px">Alles gebucht. Stark!</div>';
+}
+$('#uk-filter').addEventListener('click', e => { const b = e.target.closest('button[data-f]'); if (!b) return; ukFilter = b.dataset.f; store.set('ar27.ukF', ukFilter); renderUK(); });
+$('#uk-list').addEventListener('change', async e => {
+  if (e.target.dataset.act !== 's' || !state.db) return;
+  try { await state.db.collection('unterkuenfte').doc(e.target.closest('.uk-opt').dataset.id).update({ s: e.target.value }); } catch (err) { writeFailed(err); }
+});
+$('#uk-list').addEventListener('click', async e => {
+  const b = e.target.closest('[data-act=del]'); if (!b || !state.db) return;
+  if (!b.classList.contains('confirm')) { b.classList.add('confirm'); b.textContent = 'Löschen?'; setTimeout(() => { b.classList.remove('confirm'); b.textContent = '✕'; }, 3000); return; }
+  try { await state.db.collection('unterkuenfte').doc(b.closest('.uk-opt').dataset.id).delete(); } catch (err) { writeFailed(err); }
+});
+$('#uk-list').addEventListener('submit', async e => {
+  const f = e.target.closest('form.uk-add'); if (!f) return; e.preventDefault(); if (!state.db || !state.canWrite) return;
+  const name = f.name.value.trim(), ppn = +f.ppn.value, link = f.link.value.trim();
+  if (!name || !(ppn >= 0)) return;
+  try { await state.db.collection('unterkuenfte').add({ stop: f.dataset.stop, name: name.slice(0, 120), ppn, link: /^https?:\/\//.test(link) ? link.slice(0, 500) : '', rating: null, reviews: null, note: '', s: 'idee', src: 'neu', o: Date.now() }); } catch (err) { writeFailed(err); }
+});
+
+/* ========== Kalender-Export ========== */
+const FLIGHTS = [
+  { id:'f-lh', t:'Flug Frankfurt → Colombo (Qatar, über Doha)', s:'20270212T210500Z', e:'20270213T110000Z', loc:'Flughafen Frankfurt', d:'Ankunft Colombo 13. Feb 16:30 Ortszeit. 431 € p. P.' },
+  { id:'f-tg', t:'Flug TG308 Colombo → Bangkok', s:'20270226T193000Z', e:'20270226T231000Z', loc:'Bandaranaike International Airport, Colombo', d:'Abflug 27. Feb 01:00, Ankunft 06:10 Ortszeit. Spätestens 22:00 am Flughafen.' },
+  { id:'f-fd', t:'Flug FD3074 Chiang Mai → Krabi', s:'20270308T100500Z', e:'20270308T120500Z', loc:'Chiang Mai International Airport', d:'17:05 bis 19:05 Ortszeit. Vorher Minibus ab Pai.' },
+  { id:'f-usm', t:'Flug Koh Samui → Bangkok', s:'20270327T000000Z', e:'20270327T010000Z', loc:'Samui Airport', d:'Abflug 07:00 Ortszeit. Ankunftszeit laut Buchung ergänzen.' },
+  { id:'f-han', t:'Flug Bangkok → Hanoi', s:'20270327T070500Z', e:'20270327T090500Z', loc:'Bangkok', d:'14:05 bis 16:05 Ortszeit. Abflughafen prüfen (Suvarnabhumi oder Don Mueang).' }
+];
+const icsEsc = v => String(v).replace(/\\/g, '\\\\').replace(/;/g, '\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+function icsFold(line) {
+  const out = []; let cur = '', bytes = 0;
+  for (const ch of line) { const b = new TextEncoder().encode(ch).length; if (bytes + b > 73) { out.push(cur); cur = ' ' + ch; bytes = 1 + b; } else { cur += ch; bytes += b; } }
+  out.push(cur); return out.join('\r\n');
+}
+const dOnly = i => isoOf(i).replace(/-/g, '');
+function buildICS() {
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+  const ev = [];
+  const add = o => { ev.push('BEGIN:VEVENT', 'UID:' + o.uid + '@asienreise2027', 'DTSTAMP:' + stamp, ...o.lines, 'SUMMARY:' + icsEsc(o.t), ...(o.d ? ['DESCRIPTION:' + icsEsc(o.d)] : []), ...(o.loc ? ['LOCATION:' + icsEsc(o.loc)] : []), 'TRANSP:TRANSPARENT', 'END:VEVENT'); };
+  if ($('#cal-stops').checked) STOPS.forEach(s => add({ uid: 'stop-' + s.id, t: `${s.n} (${s.k} ${s.k === 1 ? 'Nacht' : 'Nächte'})`, lines: ['DTSTART;VALUE=DATE:' + dOnly(s.start), 'DTEND;VALUE=DATE:' + dOnly(s.end)], d: [s.via, ...(s.hl || [])].join('\n'), loc: s.n }));
+  if ($('#cal-flights').checked) {
+    FLIGHTS.forEach(f => add({ uid: f.id, t: '✈ ' + f.t, lines: ['DTSTART:' + f.s, 'DTEND:' + f.e], d: f.d, loc: f.loc }));
+    add({ uid: 'f-ice', t: 'ICE Hamburg → Frankfurt Flughafen (nachmittags)', lines: ['DTSTART;VALUE=DATE:' + dOnly(-1), 'DTEND;VALUE=DATE:' + dOnly(0)], d: 'Spätestens gegen 19:00 am Flughafen Frankfurt sein.' });
+    add({ uid: 'f-rueck', t: 'Rückflug Bali → Hamburg (noch offen)', lines: ['DTSTART;VALUE=DATE:' + dOnly(NIGHTS), 'DTEND;VALUE=DATE:' + dOnly(NIGHTS + 1)] });
+  }
+  const nextDay = iso => { const [y, m, d] = iso.split('-').map(Number); return new Date(Date.UTC(y, m - 1, d + 1)).toISOString().slice(0, 10).replace(/-/g, ''); };
+  if ($('#cal-todos').checked) state.todos.filter(t => !t.done && t.due).forEach(t => add({ uid: 'todo-' + t.id, t: 'To-do: ' + t.t, lines: ['DTSTART;VALUE=DATE:' + t.due.replace(/-/g, ''), 'DTEND;VALUE=DATE:' + nextDay(t.due)] }));
+  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Asienreise 2027//Reise-Cockpit//DE', 'CALSCALE:GREGORIAN', 'X-WR-CALNAME:Asienreise 2027', ...ev, 'END:VCALENDAR'];
+  return lines.map(icsFold).join('\r\n') + '\r\n';
+}
+function crc32(buf) { let crc = -1; for (let i = 0; i < buf.length; i++) { crc ^= buf[i]; for (let k = 0; k < 8; k++) crc = (crc >>> 1) ^ (0xEDB88320 & -(crc & 1)); } return (crc ^ -1) >>> 0; }
+function zipStore(name, data) {
+  const fn = new TextEncoder().encode(name), crc = crc32(data), n = data.length;
+  const lh = new Uint8Array(30 + fn.length), lv = new DataView(lh.buffer);
+  lv.setUint32(0, 0x04034b50, true); lv.setUint16(4, 20, true); lv.setUint16(6, 0x0800, true); lv.setUint16(8, 0, true); lv.setUint16(10, 0, true); lv.setUint16(12, 0x5A21, true);
+  lv.setUint32(14, crc, true); lv.setUint32(18, n, true); lv.setUint32(22, n, true); lv.setUint16(26, fn.length, true); lv.setUint16(28, 0, true); lh.set(fn, 30);
+  const cd = new Uint8Array(46 + fn.length), cv = new DataView(cd.buffer);
+  cv.setUint32(0, 0x02014b50, true); cv.setUint16(4, 20, true); cv.setUint16(6, 20, true); cv.setUint16(8, 0x0800, true); cv.setUint16(10, 0, true); cv.setUint16(12, 0, true); cv.setUint16(14, 0x5A21, true);
+  cv.setUint32(16, crc, true); cv.setUint32(20, n, true); cv.setUint32(24, n, true); cv.setUint16(28, fn.length, true); cv.setUint32(42, 0, true); cd.set(fn, 46);
+  const end = new Uint8Array(22), ev = new DataView(end.buffer);
+  ev.setUint32(0, 0x06054b50, true); ev.setUint16(8, 1, true); ev.setUint16(10, 1, true); ev.setUint32(12, cd.length, true); ev.setUint32(16, lh.length + n, true);
+  const out = new Uint8Array(lh.length + n + cd.length + end.length);
+  out.set(lh, 0); out.set(data, lh.length); out.set(cd, lh.length + n); out.set(end, lh.length + n + cd.length);
+  return out;
+}
+let downloadsNs = null;
+(async () => { downloadsNs = await window.claude?.use?.('downloads') || null; if (!downloadsNs) { $('#cal-copy').hidden = false; $('#cal-go').hidden = true; $('#cal-msg').textContent = 'Download ist in dieser Ansicht nicht möglich. Kopiere den Text in eine Datei mit der Endung .ics.'; } })();
+$('#cal-go').addEventListener('click', async () => {
+  const ics = buildICS(), zip = zipStore('Asienreise-2027.ics', new TextEncoder().encode(ics));
+  $('#cal-msg').textContent = '';
+  try { const r = await downloadsNs.save({ filename: 'Asienreise-2027-Kalender.zip', data: zip }); $('#cal-msg').textContent = r.status === 'saved' ? 'Gespeichert. ZIP entpacken und Asienreise-2027.ics öffnen.' : ''; }
+  catch (err) {
+    if (err?.code === 'declined') return;
+    if (err?.code === 'rate_limited') { $('#cal-msg').textContent = 'Es ist schon ein Download-Fenster offen.'; return; }
+    $('#cal-msg').textContent = 'Download hat nicht geklappt. Nutze „Kalendertext kopieren“.'; $('#cal-copy').hidden = false;
+  }
+});
+$('#cal-copy').addEventListener('click', async () => {
+  const ics = buildICS();
+  try { await navigator.clipboard.writeText(ics); $('#cal-msg').textContent = 'Kopiert. In eine Textdatei mit der Endung .ics einfügen und öffnen.'; }
+  catch { $('#cal-msg').textContent = 'Kopieren wurde blockiert.'; }
+});
+
 /* ========== Varianten ========== */
 function variantStats(v) {
   const th = v.th, plan = VARIANTS[0].th, ids = th.map(s => s.id);
@@ -1462,7 +1707,7 @@ function writeFailed(err) {
   else showBanner('Speichern hat nicht geklappt. Bitte gleich noch einmal versuchen.');
 }
 function showBanner(t) { const b = $('#db-banner'); b.textContent = t; b.hidden = false; }
-function renderAll() { renderHeader(); renderVariantBar(); renderWho(); renderTodos(); renderBookings(); renderPack(); renderEntry(); renderCheck(); renderPass(); renderVariants(); renderExpenses(); }
+function renderAll() { renderHeader(); renderVariantBar(); renderWho(); renderTodos(); renderBookings(); renderPack(); renderEntry(); renderCheck(); renderPass(); renderVariants(); renderExpenses(); renderUK(); renderActs(); }
 
 async function initDb() {
   const db = await window.claude?.use?.('db');
@@ -1480,6 +1725,7 @@ async function initDb() {
   db.collection('packliste').onSnapshot(s => { state.pack = s.docs.map(d => ({ id: d.id, ...d.data() })); if (first.p) { first.p = false; ready(); } else renderAll(); }, onErr);
   db.collection('buchungen').onSnapshot(s => { const o = {}; s.docs.forEach(d => o[d.id] = d.data()); state.bookings = o; if (first.b) { first.b = false; ready(); } else renderAll(); }, onErr);
   db.collection('checks').onSnapshot(s => { const o = {}; s.docs.forEach(d => o[d.id] = d.data()); state.checks = o; if (first.c) { first.c = false; ready(); } else renderAll(); }, onErr);
+  db.collection('unterkuenfte').onSnapshot(s => { state.uk = s.docs.map(d => ({ id: d.id, ...d.data() })); renderUK(); }, onErr);
   db.collection('ausgaben').onSnapshot(s => { state.exp = s.docs.map(d => ({ id: d.id, ...d.data() })); renderExpenses(); renderHeader(); }, onErr);
   db.doc('config/kurse').onSnapshot(s => { state.rates = s.exists ? s.data() : {}; renderExpenses(); }, onErr);
   db.doc('varianten/stimmen').onSnapshot(s => { const d = s.exists ? s.data() : {}; state.votes = { a: d.a || '', b: d.b || '' }; renderVariants(); }, onErr);
