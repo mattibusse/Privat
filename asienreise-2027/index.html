@@ -320,7 +320,7 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
     </div>
     <div class="countdown">
       <div class="n mono" id="cd-n">–</div>
-      <div class="muted" id="cd-t">Tage bis zur Anreise am 8. Feb 2027</div>
+      <div class="muted" id="cd-t">Tage bis zum Abflug am 3. Feb 2027</div>
     </div>
   </header>
   <div class="stats" id="stats"></div>
@@ -349,7 +349,7 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
         <div class="map-legend"><span><i></i>Bus, Zug, Auto</span><span><i class="f"></i>Flug</span><span><i class="w"></i>Fähre, Boot</span><span>Ziehen zum Verschieben, Mausrad oder zwei Finger zum Zoomen</span></div>
         <div class="scrub">
           <button class="btn small" id="play" aria-label="Reise abspielen">▶ Abspielen</button>
-          <input type="range" id="day" min="0" max="119" value="0" aria-label="Reisetag wählen">
+          <input type="range" id="day" min="0" max="123" value="0" aria-label="Reisetag wählen">
           <div class="read" id="day-read"></div>
         </div>
       </div>
@@ -357,7 +357,7 @@ table.t tr.sum td{font-weight:700;border-bottom:0}
     </div>
 
     <div class="panel band-wrap">
-      <div class="sec-head" style="margin:0"><h3>119 Nächte auf einen Blick</h3><span class="muted" style="font-size:.84rem">Jedes Feld ist eine Station. Anklicken zeigt sie auf der Karte.</span></div>
+      <div class="sec-head" style="margin:0"><h3 id="band-title">124 Nächte auf einen Blick</h3><span class="muted" style="font-size:.84rem">Jedes Feld ist eine Station. Anklicken zeigt sie auf der Karte.</span></div>
       <div class="band" id="band"></div>
       <div class="band-ctry" id="band-ctry"></div>
       <div class="band-months" id="band-months"></div>
@@ -537,7 +537,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt
 const store = { get(k){ try { return localStorage.getItem(k); } catch { return null; } }, set(k, v){ try { localStorage.setItem(k, v); } catch {} } };
 
 /* ---------- Datum ---------- */
-const DAY = 864e5, T0 = Date.UTC(2027, 1, 9);
+const DAY = 864e5, T0 = Date.UTC(2027, 1, 4); // erste Nacht in Sri Lanka, Abflug am 3. Feb
 const MON = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
 const WD = ['So','Mo','Di','Mi','Do','Fr','Sa'];
 const dOf = i => new Date(T0 + i * DAY);
@@ -563,13 +563,14 @@ const C = {
 };
 // mode: wie man ANKOMMT. path: Zwischenpunkte [lat, lon, Modus des Abschnitts bis dorthin].
 const BASE = [
-  {id:'negombo',c:'LK',n:'Negombo',k:1,ll:[7.21,79.84],mode:'flug',via:'Flug Frankfurt → Colombo',hl:['Ankommen, erholen','Nah am Flughafen Colombo']},
-  {id:'sigiriya',c:'LK',n:'Sigiriya & Dambulla',k:3,ll:[7.957,80.76],mode:'auto',via:'Bus oder Fahrer',hl:['Löwenfelsen Sigiriya','Höhlentempel Dambulla','Jeep-Safari Minneriya oder Kaudulla mit großen Elefantenherden'],tip:'Safari über die Unterkunft buchen. Die frühe Tour ab Sonnenaufgang bringt die besten Sichtungen.'},
-  {id:'kandy',c:'LK',n:'Kandy',k:1,ll:[7.29,80.63],mode:'bus',via:'Bus',hl:['Zahntempel','Danach Zug Richtung Ella']},
-  {id:'ella',c:'LK',n:'Ella',k:3,ll:[6.87,81.05],mode:'zug',via:'Zug Kandy → Ella',hl:['Eine der schönsten Zugstrecken der Welt','Nine Arch Bridge','Little Adam\'s Peak'],tip:'Reservierte Plätze für die Strecke sind oft früh weg. Rechtzeitig kümmern oder unreserviert 2./3. Klasse fahren.'},
+  {id:'negombo',c:'LK',n:'Negombo',k:1,ll:[7.21,79.84],mode:'flug',via:'Flug Frankfurt → Doha → Colombo, Ankunft 08:45',hl:['Ankommen, ausschlafen','Nah am Flughafen Colombo','Fischmarkt und Lagune am Nachmittag']},
+  {id:'sigiriya',c:'LK',n:'Sigiriya & Dambulla',k:4,ll:[7.957,80.76],mode:'auto',via:'Bus oder Fahrer',hl:['Löwenfelsen Sigiriya, Pidurangala zum Sonnenaufgang','Höhlentempel Dambulla','Jeep-Safari Minneriya oder Kaudulla mit großen Elefantenherden','Tagesausflug Polonnaruwa (alte Königsstadt, gut mit dem Rad)'],tip:'Safari über die Unterkunft buchen. Die frühe Tour ab Sonnenaufgang bringt die besten Sichtungen.'},
+  {id:'kandy',c:'LK',n:'Kandy',k:2,ll:[7.29,80.63],mode:'bus',via:'Bus',hl:['Zahntempel','Botanischer Garten Peradeniya','Spaziergang um den Kandy-See']},
+  {id:'adamspeak',c:'LK',n:'Adam\'s Peak',k:1,ll:[6.81,80.50],mode:'zug',via:'Zug Kandy → Hatton, Tuk-Tuk nach Dalhousie',hl:['Nachtaufstieg zum Sonnenaufgang auf dem heiligen Berg','Danach Zug ab Hatton Richtung Ella'],tip:'Pilgersaison ist Dezember bis Mai, also passt Februar. Start gegen 2 Uhr nachts, rund 5.500 Stufen. Warme Schicht für oben mitnehmen.'},
+  {id:'ella',c:'LK',n:'Ella',k:3,ll:[6.87,81.05],mode:'zug',via:'Zug Hatton → Ella, der schönste Abschnitt der Strecke',hl:['Nine Arch Bridge','Little Adam\'s Peak','Ella Rock'],tip:'Reservierte Plätze für die Strecke sind oft früh weg. Rechtzeitig kümmern oder unreserviert 2./3. Klasse fahren.'},
   {id:'tissa',c:'LK',n:'Tissamaharama (Yala)',k:1,ll:[6.28,81.29],mode:'bus',via:'Bus oder Tuk-Tuk',hl:['Jeep-Safari Yala am frühen Morgen','Chance auf Leoparden, Elefanten, Krokodile']},
-  {id:'tangalle',c:'LK',n:'Tangalle',k:1,ll:[6.02,80.79],mode:'bus',via:'Bus',hl:['Ruhige, fast leere Strände']},
-  {id:'mirissa',c:'LK',n:'Mirissa & Weligama',k:2,ll:[5.95,80.46],mode:'bus',via:'Bus oder Tuk-Tuk',hl:['Walbeobachtung in Mirissa','Surfkurs in Weligama','Coconut Tree Hill'],tip:'20. Feb ist Vollmond und damit Poya-Tag: Feiertag, kein Alkoholverkauf.'},
+  {id:'tangalle',c:'LK',n:'Tangalle',k:2,ll:[6.02,80.79],mode:'bus',via:'Bus',hl:['Ruhige, fast leere Strände','Hiriketiya Beach in der Nähe','Ein echter Ruhetag']},
+  {id:'mirissa',c:'LK',n:'Mirissa & Weligama',k:3,ll:[5.95,80.46],mode:'bus',via:'Bus oder Tuk-Tuk',hl:['Walbeobachtung in Mirissa','Surfkurs in Weligama','Coconut Tree Hill'],tip:'20. Feb ist Vollmond und damit Poya-Tag: Feiertag, kein Alkoholverkauf.'},
   {id:'galle',c:'LK',n:'Unawatuna & Galle',k:2,ll:[6.03,80.24],mode:'auto',via:'Tuk-Tuk',hl:['Jungle Beach, Schnorcheln','Fort Galle bei Sonnenuntergang','Danach Zug Galle → Colombo']},
   {id:'bangkok',c:'TH',n:'Bangkok',k:3,ll:[13.75,100.50],mode:'flug',path:[[6.93,79.85,'zug']],via:'Zug nach Colombo, Direktflug Colombo → Bangkok',hl:['Grand Palace, Wat Pho, Wat Arun','Chinatown, Khao San Road, Rooftop-Bar','Muay-Thai-Kampf im Rajadamnern oder Lumpinee','Ausflug Ayutthaya oder schwimmender Markt'],tip:'Kampftage der Stadien vorher prüfen und den Abend danach legen.'},
   {id:'chiangmai',c:'TH',n:'Chiang Mai',k:4,ll:[18.79,98.98],mode:'zug',via:'Nachtzug ab Bangkok',hl:['Altstadt-Tempel, Doi Suthep','Kochkurs','Elefanten nur in echten Schutzprojekten ohne Reiten','Tagesausflug Chiang Rai zum Weißen Tempel'],tip:'Rauchsaison: eine Woche vorher Luftqualität (AQI) prüfen, FFP2-Masken dabei haben.'},
@@ -644,7 +645,7 @@ function buildStops(v) {
   STOPS.forEach(s => { if (s.c === 'XX') return; const r = ctryRange[s.c] ||= { start: s.start, end: s.end, nights: 0, stops: [] }; r.end = s.end; r.nights += s.k; r.stops.push(s); });
   return acc;
 }
-const NIGHTS = buildStops(store.get('ar27.variant') || 'plan'); // 119, in jeder Variante gleich
+const NIGHTS = buildStops(store.get('ar27.variant') || 'plan'); // 124, in jeder Variante gleich
 const stopAt = d => STOPS.find(s => d >= s.start && d < s.end) || (d >= NIGHTS ? STOPS[STOPS.length - 1] : STOPS[0]);
 
 const MODE_TXT = { flug:'Flug', zug:'Zug', bus:'Bus', auto:'Auto', faehre:'Fähre', boot:'Boot' };
@@ -655,9 +656,8 @@ let BOOKINGS = [];
 function buildBookings() {
   const ph = STOPS.find(s => s.id === 'phangan');
   BOOKINGS = [
-  {id:'ice-hin', d:-1, m:'zug', t:'ICE Hamburg → Frankfurt', x:'Rail&Fly beim Flug prüfen, sonst Sparpreis'},
-  {id:'hotel-fra', d:-1, m:'hotel', t:'Hotel Frankfurt, 1 Nacht', x:'Flughafen oder Hauptbahnhof'},
-  {id:'lh-hin', d:0, m:'flug', t:'Langstrecke Frankfurt → Colombo', x:'Ankunftszeit prüfen (9. oder 10. Feb)'},
+  {id:'ice-hin', d:-1, m:'zug', t:'ICE Hamburg → Frankfurt Flughafen', x:'Morgens, Ankunft spätestens 11:30. Rail&Fly prüfen, sonst Sparpreis'},
+  {id:'lh-hin', d:-1, m:'flug', t:'Frankfurt → Doha → Colombo, 15:00 → 08:45 (+1)', x:'Qatar-Flüge, bei Kiwi ca. 428 € p. P. mit Gepäck. Direkt bei Qatar vergleichen'},
   {id:'eta-lk', d:-3, m:'doc', t:'Sri Lanka ETA online', x:'Kostenlos, vor dem Abflug'},
   {id:'negombo', d:S('negombo'), m:'hotel', t:'Unterkunft Negombo'},
   {id:'cmb-bkk', d:S('bangkok'), m:'flug', t:'Colombo → Bangkok'},
@@ -698,12 +698,6 @@ const FINDINGS = [
   {id:'transit23', sev:'kritisch', stop:'transit', t:'Die Nacht vom 23. auf den 24. März fehlt im Plan',
    d:'Thailand endet mit der Partynacht am 22. März, Vietnam beginnt laut Plan erst am 24. Für die Nacht dazwischen gibt es weder Unterkunft noch Flug. Bleibt ihr diese Nacht in Bangkok, verlasst ihr Thailand am 24. März, also am 30. und letzten erlaubten Tag ohne Puffer.',
    fix:'Am 23. ab dem späten Nachmittag Surat Thani oder Samui → Bangkok → Hanoi durchfliegen und Hanoi um eine Nacht verlängern. Thailand-Ausreise bleibt am Tag 29.', todo:{t:'Transit 23. März festlegen: Flug Surat Thani/Samui → Bangkok → Hanoi am Nachmittag, Hanoi ab 23. buchen', g:'2026-12', due:'2026-12-15'}},
-  {id:'ankunft', sev:'pruefen', stop:'negombo', t:'Ankunft in Colombo wahrscheinlich erst am 10. Februar',
-   d:'Flüge Frankfurt → Colombo haben meist einen Umstieg und landen am nächsten Tag. Dann liegt die Negombo-Nacht vom 9. Februar im Flugzeug, und Sri Lanka hat 13 statt 14 Nächte.',
-   fix:'Beim Buchen Ankunftszeit prüfen. Bei Landung am Morgen direkt nach Sigiriya fahren und Negombo streichen.', todo:{t:'Bei der Langstrecke Ankunftszeit in Colombo prüfen, Negombo-Nacht anpassen', g:'2026-11', due:'2026-11-30'}},
-  {id:'hamburg', sev:'option', stop:'negombo', t:'Hinflug direkt ab Hamburg vergleichen',
-   d:'Für den Rückflug ist Hamburg ohnehin geplant. Ein Hinflug ab Hamburg mit einem Umstieg spart den ICE, die Hotelnacht in Frankfurt und einen Reisetag.',
-   fix:'Gabelflug Hamburg → Colombo und Bali → Hamburg gegen die Frankfurt-Variante inklusive Zug und Hotel rechnen.', todo:{t:'Preisvergleich: Hinflug ab Hamburg vs. Frankfurt inkl. ICE und Hotel', g:'2026-11', due:'2026-11-15'}},
   {id:'fluege', sev:'pruefen', t:'Es sind rund 14 regionale Flugsegmente, nicht 6 bis 8',
    d:'Mit Umstiegen kommen zusammen: Colombo → Bangkok, Chiang Mai → Phuket, Surat Thani → Bangkok → Hanoi, Da Nang → Saigon, Saigon → Tokio, Japan → Manila, Manila → Puerto Princesa, Coron → Cebu → Siargao, Siargao → Cebu → Kuala Lumpur, Singapur → Bali, Labuan Bajo → Bali. Das Budget rechnet mit ca. 9 Flügen.',
    fix:'Im Buchungen-Tab alle Strecken mit ersten Preisen versehen und den Flugposten im Budget neu schätzen.', todo:{t:'Flugbudget neu schätzen: alle 14 Regionalsegmente mit Preisen hinterlegen', g:'2026-11', due:'2026-11-30'}},
@@ -761,11 +755,11 @@ const SEASON = [
 const SEASON_TXT = { g:'gut', o:'okay', b:'ungünstig' };
 
 /* ---------- Budget ---------- */
-const BUDGET = [['LK',14,28,38],['TH',29,32,45],['VN',18,25,32],['JP',12,70,95],['PH',20,35,45],['MY',2,35,50],['SG',2,60,90],['ID',23,30,40]];
+const BUDGET = [['LK',20,28,38],['TH',29,32,45],['VN',18,25,32],['JP',12,70,95],['PH',20,35,45],['MY',2,35,50],['SG',2,60,90],['ID',23,30,40]];
 const TOTAL = [
-  ['Tageskosten (oben)',4190,5655],
+  ['Tageskosten (oben)',4360,5885],
   ['Langstrecke Frankfurt → Colombo, Bali → Frankfurt',900,1250],
-  ['Zug Hamburg → Frankfurt, 1 Hotelnacht, ggf. Zug zurück',40,210],
+  ['Zug Hamburg → Frankfurt (kein Hotel nötig), ggf. Zug zurück',40,210],
   ['Regionalflüge, Fähren, Bus',1200,1500],
   ['Aktivitäten: Bootstour, 2 Safaris, Ha Giang, Schnorcheln, Full Moon Party',700,1200],
   ['Auslandskrankenversicherung, Impfungen, Visa',300,800]
@@ -799,20 +793,20 @@ state.sel = stopAt(state.day).i;
 
 /* ========== Kopf ========== */
 function renderHeader() {
-  const dLeft = Math.round((Date.UTC(2027, 1, 8) - Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / DAY);
-  if (dLeft > 0) { $('#cd-n').textContent = dLeft; $('#cd-t').textContent = (dLeft === 1 ? 'Tag' : 'Tage') + ' bis zur Anreise am 8. Feb 2027'; }
-  else if (TODAY < NIGHTS) { $('#cd-n').textContent = 'Tag ' + (TODAY + 1); $('#cd-t').textContent = 'von 120, heute: ' + stopAt(TODAY).n; }
+  const dLeft = Math.round((Date.UTC(2027, 1, 3) - Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / DAY);
+  if (dLeft > 0) { $('#cd-n').textContent = dLeft; $('#cd-t').textContent = (dLeft === 1 ? 'Tag' : 'Tage') + ' bis zum Abflug am 3. Feb 2027'; }
+  else if (TODAY < NIGHTS) { $('#cd-n').textContent = 'Tag ' + (TODAY + 2); $('#cd-t').textContent = 'von ' + (NIGHTS + 2) + ', heute: ' + stopAt(TODAY).n; }
   else { $('#cd-n').textContent = '✓'; $('#cd-t').textContent = 'Reise abgeschlossen'; }
   const open = state.todos.filter(t => !t.done).length;
   const booked = BOOKINGS.filter(b => ['gebucht','vorort'].includes(state.bookings[b.id]?.s)).length;
   const moves = STOPS.length - 1;
   $('#stats').innerHTML = [
-    ['120', 'Tage, 9. Feb bis 8. Jun'],
+    [String(NIGHTS + 2), 'Tage, 3. Feb bis 8. Jun'],
     ['8', 'Länder und Stadtstaaten'],
     [STOPS.length, 'Stationen, ' + moves + ' Ortswechsel'],
     ['~' + FLIGHT_SEGMENTS, 'Regionalflüge plus Langstrecke'],
     [state.dbReady ? booked + '/' + BOOKINGS.length : '–', 'Buchungen erledigt'],
-    ['7,3–10,6k', '€ pro Person, geschätzt']
+    ['7,5–10,8k', '€ pro Person, geschätzt']
   ].map(([b, s]) => `<div><b class="mono">${esc(b)}</b><span>${esc(s)}</span></div>`).join('');
   $('#names-line').textContent = state.names.a + ' & ' + state.names.b;
   $('#b-todos').textContent = state.dbReady ? open : '';
@@ -995,7 +989,7 @@ function renderDay() {
   const d = state.day, s = stopAt(d);
   $('#day').value = d;
   const ev = EVENTS.find(x => x.d === d);
-  $('#day-read').innerHTML = `<span class="mono">Tag ${d + 1}</span> · ${fmt(d, true)} 2027 · <b>${esc(s.n)}</b> <span class="muted">(${esc(C[s.c].n)})</span>${ev ? ` · <span style="color:var(--accent);font-weight:600">${esc(ev.t)}</span>` : ''}`;
+  $('#day-read').innerHTML = `<span class="mono">Tag ${d + 2}</span> · ${fmt(d, true)} 2027 · <b>${esc(s.n)}</b> <span class="muted">(${esc(C[s.c].n)})</span>${ev ? ` · <span style="color:var(--accent);font-weight:600">${esc(ev.t)}</span>` : ''}`;
   $('#band-cursor').style.left = ((d + 0.5) / NIGHTS * 100) + '%';
 }
 let playT = null;
@@ -1012,7 +1006,7 @@ $('#play').onclick = () => {
 $('#day').addEventListener('input', e => { stopPlay(); state.day = +e.target.value; const s = stopAt(state.day); if (s.i !== state.sel) selectStop(s.i, { zoom: false, keepDay: true }); else renderDay(); });
 
 const EVENTS = [
-  { d: -1, t: 'ICE nach Frankfurt' }, { d: 0, t: 'Abflug FRA → CMB' }, { d: idxISO('2027-02-20'), t: 'Poya-Tag Sri Lanka' },
+  { d: -1, t: 'ICE und Abflug FRA → CMB' }, { d: 0, t: 'Ankunft Colombo 08:45' }, { d: idxISO('2027-02-20'), t: 'Poya-Tag Sri Lanka' },
   { d: idxISO('2027-03-22'), t: 'Full Moon Party' }, { d: idxISO('2027-03-23'), t: 'Ausreise Thailand (Tag 29/30)' },
   { d: idxISO('2027-04-29'), t: 'Golden Week Japan (ihr seid weg)' }, { d: idxISO('2027-05-16'), t: 'Eid al-Adha (vorauss.)' },
   { d: S('boot'), t: 'Start Bootstour' }, { d: NIGHTS, t: 'Rückflug DPS → HAM' }
@@ -1022,10 +1016,11 @@ function renderBand() {
   const parts = []; let last = null;
   STOPS.forEach(s => { if (last && last.c === s.c) last.k += s.k; else { last = { c: s.c, k: s.k }; parts.push(last); } });
   $('#band-ctry').innerHTML = parts.map(p => `<span style="flex:${p.k} 1 0;color:var(--c-${p.c})">${p.k >= 6 ? esc(C[p.c].n) : p.c === 'XX' ? '' : p.c}</span>`).join('');
-  $('#band-months').innerHTML = [['2027-02-09','9. Feb'],['2027-03-01','Mär'],['2027-04-01','Apr'],['2027-05-01','Mai'],['2027-06-01','Jun']].map(([iso, t]) => `<span style="left:${idxISO(iso) / NIGHTS * 100}%">${t}</span>`).join('');
-  $('#events').innerHTML = EVENTS.map(e => `<span class="chip"><span class="mono">${e.d < 0 ? '8. Feb' : fmt(e.d)}</span> ${esc(e.t)}</span>`).join('');
+  $('#band-months').innerHTML = [['2027-02-04','4. Feb'],['2027-03-01','Mär'],['2027-04-01','Apr'],['2027-05-01','Mai'],['2027-06-01','Jun']].map(([iso, t]) => `<span style="left:${idxISO(iso) / NIGHTS * 100}%">${t}</span>`).join('');
+  $('#events').innerHTML = EVENTS.map(e => `<span class="chip"><span class="mono">${fmt(e.d)}</span> ${esc(e.t)}</span>`).join('');
 }
 renderBand();
+$('#day').max = NIGHTS - 1; $('#band-title').textContent = NIGHTS + ' Nächte auf einen Blick';
 $('#band').addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (b) selectStop(+b.dataset.i); });
 
 function renderLegs() {
@@ -1047,7 +1042,7 @@ function markLists() {
 function renderCheck() {
   const items = [];
   const gaps = STOPS.filter(s => s.gap);
-  items.push(gaps.length ? ['no', `${gaps.length} Nacht ohne Plan: ${gaps.map(s => fmt(s.start)).join(', ')}`] : ['ok', 'Alle 119 Nächte sind verplant']);
+  items.push(gaps.length ? ['no', `${gaps.length} Nacht ohne Plan: ${gaps.map(s => fmt(s.start)).join(', ')}`] : ['ok', `Alle ${NIGHTS} Nächte sind verplant`]);
   const ph = STOPS.find(s => s.start <= idxISO('2027-03-22') && s.end > idxISO('2027-03-22'));
   items.push([ph.id === 'phangan' ? 'ok' : 'no', `Full Moon Party 22. März: ihr seid auf ${ph.n}`]);
   const jp = ctryRange.JP; const gw = idxISO('2027-04-29');
@@ -1163,7 +1158,7 @@ function renderBookings() {
   const ro = state.canWrite ? '' : ' disabled';
   $('#bookings').innerHTML = rows.map(b => {
     const st = state.bookings[b.id] || {}, s = st.s || 'offen';
-    const date = b.d === -1 ? 'Mo, 8. Feb' : b.d === -3 ? 'vor Abflug' : fmt(b.d, true);
+    const date = b.d === -3 ? 'vor Abflug' : fmt(b.d, true);
     return `<div class="bk" data-id="${b.id}" data-s="${s}"><span class="d">${date}</span><span class="m"><span class="mode">${BK_ICON[b.m]}</span></span>
       <div class="t" style="min-width:0"><b>${esc(b.t)}</b>${b.x ? `<div class="muted" style="font-size:.8rem">${esc(b.x)}</div>` : ''}<input type="text" data-act="note" placeholder="Buchungsnr., Preis, Uhrzeit" value="${esc(st.n || '')}"${ro} aria-label="Notiz zu ${esc(b.t)}"></div>
       <select data-act="status"${ro} aria-label="Status ${esc(b.t)}"><option value="offen"${s === 'offen' ? ' selected' : ''}>Offen</option><option value="gebucht"${s === 'gebucht' ? ' selected' : ''}>Gebucht</option><option value="vorort"${s === 'vorort' ? ' selected' : ''}>Vor Ort buchen</option></select></div>`;
@@ -1192,7 +1187,7 @@ $('#bookings').addEventListener('change', async e => {
 function renderEntry() {
   $('#entry').innerHTML = `<table class="t"><thead><tr><th>Land</th><th>Regel</th><th>Kosten</th><th>Formular</th><th class="r">Einreise</th><th class="r">Ausfüllen ab</th></tr></thead><tbody>${ENTRY.map(([c, rule, cost, form, pre]) => {
     const a = ctryRange[c].start;
-    const from = pre === 'pre' ? 'vor 9. Feb' : typeof pre === 'number' ? fmt(a - pre) : '–';
+    const from = pre === 'pre' ? 'vor 3. Feb' : typeof pre === 'number' ? fmt(a - pre) : '–';
     return `<tr><td><span class="dot" style="background:var(--c-${c});margin-right:6px"></span>${esc(C[c].n)}</td><td>${esc(rule)}</td><td>${esc(cost)}</td><td>${esc(form || '–')}</td><td class="r">${fmt(a)}</td><td class="r">${from}</td></tr>`;
   }).join('')}</tbody></table>`;
   $('#pass-a-l').textContent = state.names.a; $('#pass-b-l').textContent = state.names.b;
@@ -1447,7 +1442,7 @@ function planText() {
   const lines = STOPS.map(s => `${fmt(s.start)}: ${s.n} (${C[s.c].n}), ${s.k} Nächte, Anreise ${MODE_TXT[s.mode]}: ${s.via}${s.gap ? ' [NOCH UNGEPLANT]' : ''}`);
   const f = activeFindings().map(x => `- [${SEV[x.sev][0]}${state.checks[x.id]?.s && state.checks[x.id].s !== 'offen' ? ', Status ' + state.checks[x.id].s : ''}] ${x.t}: ${x.d} Vorschlag: ${x.fix}`);
   const b = BUDGET.map(([c, d, lo, hi]) => `${C[c].n}: ${d} Tage × ${lo} bis ${hi} €`);
-  return `Angezeigte Thailand-Variante: ${VARIANTS.find(v => v.id === variant).n}.\nReise: 2 Personen, Backpacker (Hostels, Busse, Nachtzüge). 9. Feb bis 8. Jun 2027. Start Frankfurt, Rückflug ab Bali.\nHighlights: Safaris Sri Lanka, Full Moon Party Koh Phangan 22.3., Muay Thai, Ha Giang Loop mit Easy Rider, Schnorcheln, Bootstour nach Komodo.\n\nStationen:\n${lines.join('\n')}\n\nBekannte Funde:\n${f.join('\n')}\n\nTageskosten-Schätzung pro Person:\n${b.join('\n')}\nGesamt geschätzt 7.330 bis 10.615 € pro Person.`;
+  return `Angezeigte Thailand-Variante: ${VARIANTS.find(v => v.id === variant).n}.\nReise: 2 Personen, Backpacker (Hostels, Busse, Nachtzüge). Abflug 3. Feb ab Frankfurt (Qatar über Doha, Ankunft Colombo 4. Feb 08:45), Rückflug 8. Jun 2027, Rückflug ab Bali.\nHighlights: Safaris Sri Lanka, Full Moon Party Koh Phangan 22.3., Muay Thai, Ha Giang Loop mit Easy Rider, Schnorcheln, Bootstour nach Komodo.\n\nStationen:\n${lines.join('\n')}\n\nBekannte Funde:\n${f.join('\n')}\n\nTageskosten-Schätzung pro Person:\n${b.join('\n')}\nGesamt geschätzt 7.330 bis 10.615 € pro Person.`;
 }
 let askAbort = null;
 async function initAsk() {
